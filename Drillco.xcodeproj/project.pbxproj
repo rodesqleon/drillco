@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B3323B51E7036BB00BB47BB /* RequisitionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3323B41E7036BB00BB47BB /* RequisitionTableViewController.m */; };
 		A4325C851E6E4C1D005AF214 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4325C841E6E4C1D005AF214 /* QuartzCore.framework */; };
 		A4325C861E6E4F83005AF214 /* LoginAdminViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E481F81E6E46DA00D21E34 /* LoginAdminViewController.m */; };
 		A4325C871E6E4F87005AF214 /* LoginAdminView_style_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E481FB1E6E4ABD00D21E34 /* LoginAdminView_style_1.xib */; };
@@ -24,7 +25,6 @@
 		A4E481F21E6E29B400D21E34 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E481F11E6E29B400D21E34 /* LoginViewController.m */; };
 		A4E481F41E6E2A8A00D21E34 /* LoginView_style_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E481F31E6E2A8A00D21E34 /* LoginView_style_1.xib */; };
 		A4F8BDE81E6F7E92009A80ED /* RequisitionListView_style_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4F8BDE71E6F7E92009A80ED /* RequisitionListView_style_1.xib */; };
-		A4F8BDEB1E6F8055009A80ED /* RequisitionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F8BDEA1E6F8055009A80ED /* RequisitionListViewController.m */; };
 		A4F8BDEF1E6F80B3009A80ED /* RequisitionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F8BDED1E6F80B3009A80ED /* RequisitionCell.m */; };
 		A4F8BDF01E6F80B3009A80ED /* RequisitionCellView_style_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4F8BDEE1E6F80B3009A80ED /* RequisitionCellView_style_1.xib */; };
 /* End PBXBuildFile section */
@@ -47,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B3323B31E7036BB00BB47BB /* RequisitionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequisitionTableViewController.h; sourceTree = "<group>"; };
+		7B3323B41E7036BB00BB47BB /* RequisitionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequisitionTableViewController.m; sourceTree = "<group>"; };
 		A4325C841E6E4C1D005AF214 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A4E481991E6E27EF00D21E34 /* Drillco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drillco.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4E4819D1E6E27EF00D21E34 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -85,8 +87,6 @@
 		A4E481F81E6E46DA00D21E34 /* LoginAdminViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginAdminViewController.m; sourceTree = "<group>"; };
 		A4E481FB1E6E4ABD00D21E34 /* LoginAdminView_style_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginAdminView_style_1.xib; sourceTree = "<group>"; };
 		A4F8BDE71E6F7E92009A80ED /* RequisitionListView_style_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequisitionListView_style_1.xib; sourceTree = "<group>"; };
-		A4F8BDE91E6F8055009A80ED /* RequisitionListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequisitionListViewController.h; sourceTree = "<group>"; };
-		A4F8BDEA1E6F8055009A80ED /* RequisitionListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequisitionListViewController.m; sourceTree = "<group>"; };
 		A4F8BDEC1E6F80B3009A80ED /* RequisitionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequisitionCell.h; sourceTree = "<group>"; };
 		A4F8BDED1E6F80B3009A80ED /* RequisitionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequisitionCell.m; sourceTree = "<group>"; };
 		A4F8BDEE1E6F80B3009A80ED /* RequisitionCellView_style_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequisitionCellView_style_1.xib; sourceTree = "<group>"; };
@@ -243,11 +243,11 @@
 			isa = PBXGroup;
 			children = (
 				A4F8BDE71E6F7E92009A80ED /* RequisitionListView_style_1.xib */,
-				A4F8BDE91E6F8055009A80ED /* RequisitionListViewController.h */,
-				A4F8BDEA1E6F8055009A80ED /* RequisitionListViewController.m */,
 				A4F8BDEC1E6F80B3009A80ED /* RequisitionCell.h */,
 				A4F8BDED1E6F80B3009A80ED /* RequisitionCell.m */,
 				A4F8BDEE1E6F80B3009A80ED /* RequisitionCellView_style_1.xib */,
+				7B3323B31E7036BB00BB47BB /* RequisitionTableViewController.h */,
+				7B3323B41E7036BB00BB47BB /* RequisitionTableViewController.m */,
 			);
 			path = Requisitions;
 			sourceTree = "<group>";
@@ -394,7 +394,7 @@
 				A4325C861E6E4F83005AF214 /* LoginAdminViewController.m in Sources */,
 				A4E481F21E6E29B400D21E34 /* LoginViewController.m in Sources */,
 				A4E481A11E6E27EF00D21E34 /* AppDelegate.m in Sources */,
-				A4F8BDEB1E6F8055009A80ED /* RequisitionListViewController.m in Sources */,
+				7B3323B51E7036BB00BB47BB /* RequisitionTableViewController.m in Sources */,
 				A4E4819E1E6E27EF00D21E34 /* main.m in Sources */,
 				A4E481E91E6E28CE00D21E34 /* SQLClient.m in Sources */,
 			);

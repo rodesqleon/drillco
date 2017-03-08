@@ -32,6 +32,7 @@ NSString * const kdb = @"Drilprue";
     // Navigation bar setup
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.navigationBar.backItem setTitle:@""];
     // Assign textfield delegate
     self.username_txt.delegate = self;
     self.password_txt.delegate = self;

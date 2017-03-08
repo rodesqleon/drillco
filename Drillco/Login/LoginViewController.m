@@ -72,9 +72,25 @@ NSString * const db = @"Drilprue";
 }
 
 - (void)goToRequisitionList{
-    self.requisitionList_vc = [[RequisitionListViewController alloc] initWithNibName:@"RequisitionListView_style_1" bundle:nil];
-    self.requisitionList_vc.username = self.username_txt.text;
-    [[self navigationController] pushViewController:self.requisitionList_vc animated:YES];
+    NSString *query = [NSString stringWithFormat:@"select P.ID, v.NAME, P.VENDOR_ID, pr.CURRENCY_ID, P.DESIRED_RECV_DATE, PR.AMOUNT from PURC_REQUISITION p, VENDOR v, PURC_REQ_CURR pr where pr.currency_id = P.CURRENCY_ID and p.ASSIGNED_TO = 'FPADILLA' and p.STATUS = 'I' and p.VENDOR_ID = v.ID and p.ID = pr.PURC_REQ_ID order by P.REQUISITION_DATE"];
+    SQLClient* client = [SQLClient sharedInstance];
+    client.delegate = self;
+    [client connect:host username:user password:pass database:db completion:^(BOOL success) {
+        if (success)
+        {
+            [client execute:query completion:^(NSArray* results) {
+                self.requisitionList_vc = [[RequisitionTableViewController alloc] initWithNibName:@"RequisitionListView_style_1" bundle:nil];
+                self.requisitionList_vc.username = self.username_txt.text;
+                self.requisitionList_vc.requisition = results[0];
+                [[self navigationController] pushViewController:self.requisitionList_vc animated:YES];
+                [client disconnect];
+                
+            }];
+        }
+        else{
+            NSLog(@"An error ocurr");
+        }
+    }];
 
 }
 
@@ -89,8 +105,8 @@ NSString * const db = @"Drilprue";
 //Required
 - (void)error:(NSString*)error code:(int)code severity:(int)severity
 {
-    NSLog(@"Error #%d: %@ (Severity %d)", code, error, severity);
-    [[[UIAlertView alloc] initWithTitle:@"Error" message:error delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+    /*NSLog(@"Error #%d: %@ (Severity %d)", code, error, severity);
+    [[[UIAlertView alloc] initWithTitle:@"Error" message:error delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];*/
 }
 
 //Optional
