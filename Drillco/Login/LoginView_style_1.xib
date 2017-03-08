@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
+            <connections>
+                <outlet property="password_txt" destination="oOt-tV-kyj" id="r2r-Mo-0Bg"/>
+                <outlet property="username_txt" destination="puq-Yc-Ios" id="K9K-km-rIr"/>
+                <outlet property="view" destination="iN0-l3-epB" id="dnO-nv-bTj"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="USUARIO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="puq-Yc-Ios">
+                    <rect key="frame" x="24" y="165" width="272" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Xgg-9D-8wj"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="hkm-QB-4fV"/>
+                    </connections>
+                </textField>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vzj-qM-EY3">
+                    <rect key="frame" x="24" y="208" width="272" height="1"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="hgj-bh-C4j"/>
+                    </constraints>
+                </view>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="CONTRASEÑA" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oOt-tV-kyj">
+                    <rect key="frame" x="24" y="217" width="272" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="TiD-b8-cYX"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="v6K-IT-SiF"/>
+                    </connections>
+                </textField>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EyI-bk-rRB">
+                    <rect key="frame" x="24" y="260" width="272" height="1"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="pVV-Lz-Q3v"/>
+                    </constraints>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_logo" translatesAutoresizingMaskIntoConstraints="NO" id="TH6-cY-iNl">
+                    <rect key="frame" x="71" y="55" width="179" height="60"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KL8-YC-ikj">
+                    <rect key="frame" x="85" y="400" width="150" height="60"/>
+                    <color key="backgroundColor" red="0.98431372549019602" green="0.75294117647058822" blue="0.1764705882352941" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="ffj-Fp-Tka"/>
+                        <constraint firstAttribute="width" constant="150" id="kAm-wY-7FJ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
+                    <state key="normal" title="INGRESAR">
+                        <color key="titleColor" red="0.42352941176470588" green="0.12156862745098039" blue="0.45098039215686275" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="doLogin:" destination="-1" eventType="touchUpInside" id="wVG-Gx-1t9"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WES-nd-fdh">
+                    <rect key="frame" x="274" y="45" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="38q-Pg-7Ce"/>
+                        <constraint firstAttribute="width" constant="30" id="3z6-WC-9GA"/>
+                    </constraints>
+                    <state key="normal" image="admin_btn"/>
+                    <connections>
+                        <action selector="goToAdminLogin:" destination="-1" eventType="touchUpInside" id="CaO-iL-B4P"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="vzj-qM-EY3" firstAttribute="centerX" secondItem="puq-Yc-Ios" secondAttribute="centerX" id="224-fV-gUR"/>
+                <constraint firstItem="EyI-bk-rRB" firstAttribute="centerX" secondItem="oOt-tV-kyj" secondAttribute="centerX" id="322-u4-egh"/>
+                <constraint firstItem="oOt-tV-kyj" firstAttribute="centerX" secondItem="puq-Yc-Ios" secondAttribute="centerX" id="3f7-De-X58"/>
+                <constraint firstItem="puq-Yc-Ios" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-50" id="8uW-dQ-8mO"/>
+                <constraint firstItem="TH6-cY-iNl" firstAttribute="centerX" secondItem="puq-Yc-Ios" secondAttribute="centerX" id="9DN-y1-N3W"/>
+                <constraint firstItem="vzj-qM-EY3" firstAttribute="top" secondItem="puq-Yc-Ios" secondAttribute="bottom" constant="-7" id="9f5-0J-EBb"/>
+                <constraint firstItem="puq-Yc-Ios" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="24" id="COO-rp-5jT"/>
+                <constraint firstItem="puq-Yc-Ios" firstAttribute="top" secondItem="TH6-cY-iNl" secondAttribute="bottom" constant="50" id="Dhq-CN-CU1"/>
+                <constraint firstItem="vzj-qM-EY3" firstAttribute="leading" secondItem="puq-Yc-Ios" secondAttribute="leading" id="GWI-cL-aYA"/>
+                <constraint firstItem="EyI-bk-rRB" firstAttribute="top" secondItem="oOt-tV-kyj" secondAttribute="bottom" constant="-7" id="HkB-q0-0CG"/>
+                <constraint firstItem="vzj-qM-EY3" firstAttribute="trailing" secondItem="puq-Yc-Ios" secondAttribute="trailing" id="XIE-mR-Hbz"/>
+                <constraint firstItem="EyI-bk-rRB" firstAttribute="leading" secondItem="oOt-tV-kyj" secondAttribute="leading" id="ZgT-Ca-nHX"/>
+                <constraint firstItem="KL8-YC-ikj" firstAttribute="centerX" secondItem="puq-Yc-Ios" secondAttribute="centerX" id="dcy-n7-D6A"/>
+                <constraint firstItem="EyI-bk-rRB" firstAttribute="trailing" secondItem="oOt-tV-kyj" secondAttribute="trailing" id="hb0-y1-T18"/>
+                <constraint firstItem="oOt-tV-kyj" firstAttribute="trailing" secondItem="puq-Yc-Ios" secondAttribute="trailing" id="hkF-mT-Tsp"/>
+                <constraint firstItem="WES-nd-fdh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="45" id="iVd-Cb-Fba"/>
+                <constraint firstItem="oOt-tV-kyj" firstAttribute="top" secondItem="vzj-qM-EY3" secondAttribute="bottom" constant="8" id="oHQ-KE-wCz"/>
+                <constraint firstAttribute="bottom" secondItem="KL8-YC-ikj" secondAttribute="bottom" constant="20" id="pko-f1-DdI"/>
+                <constraint firstItem="oOt-tV-kyj" firstAttribute="leading" secondItem="puq-Yc-Ios" secondAttribute="leading" id="w7M-UG-9Zv"/>
+                <constraint firstAttribute="trailing" secondItem="WES-nd-fdh" secondAttribute="trailing" constant="16" id="wle-4V-4cP"/>
+                <constraint firstAttribute="trailing" secondItem="puq-Yc-Ios" secondAttribute="trailing" constant="24" id="xfS-bQ-iul"/>
+            </constraints>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="iJg-jV-00x" appends="YES" id="RXH-3e-oKm"/>
+            </connections>
+            <point key="canvasLocation" x="33" y="54"/>
+        </view>
+        <tapGestureRecognizer id="iJg-jV-00x">
+            <connections>
+                <outlet property="delegate" destination="-1" id="Xcv-Dw-wp9"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+    <resources>
+        <image name="admin_btn" width="60" height="60"/>
+        <image name="login_logo" width="179" height="60"/>
+    </resources>
+</document>
