@@ -8,6 +8,7 @@
 
 #import "RequisitionTableViewController.h"
 #import "RequisitionCell.h"
+#import "RequisitionDetailViewController.h"
 
 NSString * const r_host = @"200.72.13.150";
 NSString * const r_user = @"sa";
@@ -23,7 +24,6 @@ NSString * const r_db = @"Drilprue";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"REQUISICIONES";
     [self.requisitionTableView registerNib:[UINib nibWithNibName:@"RequisitionCellView_style_1" bundle:nil] forCellReuseIdentifier:@"RequisitionIdentifier"];
     self.requisitionTableView.dataSource = self;
 }
@@ -33,6 +33,7 @@ NSString * const r_db = @"Drilprue";
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar.backItem setTitle:@""];
+    self.navigationController.navigationBar.topItem.title = @"REQUISICIONES";
     self.username_lbl.text = self.username;
 }
 
@@ -73,6 +74,26 @@ NSString * const r_db = @"Drilprue";
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *info = [self.requisition objectAtIndex:indexPath.row];
+    NSString *query = [NSString stringWithFormat:@"select pl.LINE_NO as [LINEA], pl.PART_ID as [CODIGO PRODUCTO], (case isnull(p.description,'') when '' then CONVERT(VARCHAR(200),CONVERT(VARBINARY(200),pb.bits)) else p.DESCRIPTION end) as [PRODUCTO], pl.ORDER_QTY as [CANTIDAD], pl.UNIT_PRICE as [PRECIO UNITARIO], pl.ORDER_QTY * pl.UNIT_PRICE as [TOTAL FINAL] from PURC_REQ_LINE pl,PURC_REQ_LN_BINARY pb, PART p where pl.PURC_REQ_ID = '%@' and pl.PURC_REQ_ID *= pb.PURC_REQ_ID and pl.LINE_NO *= pb.PURC_REQ_LINE_NO and pl.PART_ID *= p.id order by pl.line_no", info[@"ID"]];
+    SQLClient* client = [SQLClient sharedInstance];
+    client.delegate = self;
+    [client connect:r_host username:r_user password:r_pass database:r_db completion:^(BOOL success) {
+        if (success)
+        {
+            [client execute:query completion:^(NSArray* results) {
+                RequisitionDetailViewController * requisitionDetail_vc = [[RequisitionDetailViewController alloc] initWithNibName:@"RequisitionDetailView_style_1" bundle:nil];
+                requisitionDetail_vc.requisitionDetail = results[0];
+                requisitionDetail_vc.provider_name = info[@"NAME"];
+                requisitionDetail_vc.requisition_id = info[@"ID"];
+                [[self navigationController] pushViewController:requisitionDetail_vc animated:YES];
+                [client disconnect];
+                
+            }];
+        }
+        else{
+            NSLog(@"An error ocurr");
+        }
+    }];
     [self.requisitionTableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

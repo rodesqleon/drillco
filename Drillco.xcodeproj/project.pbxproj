@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B0F49B41E70901700C6C999 /* RequisitionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0F49B21E70901700C6C999 /* RequisitionDetailViewController.m */; };
+		7B0F49B51E70901700C6C999 /* RequisitionDetailView_style_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B0F49B31E70901700C6C999 /* RequisitionDetailView_style_1.xib */; };
+		7B0F49B91E70977600C6C999 /* RequisitionDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0F49B71E70977600C6C999 /* RequisitionDetailCell.m */; };
+		7B0F49BA1E70977600C6C999 /* RequisitionDetailCellView_style_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B0F49B81E70977600C6C999 /* RequisitionDetailCellView_style_1.xib */; };
+		7B0F49BE1E70A8A600C6C999 /* SupplierViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0F49BC1E70A8A600C6C999 /* SupplierViewController.m */; };
+		7B0F49BF1E70A8A600C6C999 /* SupplierView_style_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B0F49BD1E70A8A600C6C999 /* SupplierView_style_1.xib */; };
 		7B3323B51E7036BB00BB47BB /* RequisitionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3323B41E7036BB00BB47BB /* RequisitionTableViewController.m */; };
 		A4325C851E6E4C1D005AF214 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4325C841E6E4C1D005AF214 /* QuartzCore.framework */; };
 		A4325C861E6E4F83005AF214 /* LoginAdminViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E481F81E6E46DA00D21E34 /* LoginAdminViewController.m */; };
@@ -47,6 +53,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B0F49B11E70901700C6C999 /* RequisitionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequisitionDetailViewController.h; sourceTree = "<group>"; };
+		7B0F49B21E70901700C6C999 /* RequisitionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequisitionDetailViewController.m; sourceTree = "<group>"; };
+		7B0F49B31E70901700C6C999 /* RequisitionDetailView_style_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequisitionDetailView_style_1.xib; sourceTree = "<group>"; };
+		7B0F49B61E70977600C6C999 /* RequisitionDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequisitionDetailCell.h; sourceTree = "<group>"; };
+		7B0F49B71E70977600C6C999 /* RequisitionDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequisitionDetailCell.m; sourceTree = "<group>"; };
+		7B0F49B81E70977600C6C999 /* RequisitionDetailCellView_style_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequisitionDetailCellView_style_1.xib; sourceTree = "<group>"; };
+		7B0F49BB1E70A8A600C6C999 /* SupplierViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupplierViewController.h; sourceTree = "<group>"; };
+		7B0F49BC1E70A8A600C6C999 /* SupplierViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupplierViewController.m; sourceTree = "<group>"; };
+		7B0F49BD1E70A8A600C6C999 /* SupplierView_style_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SupplierView_style_1.xib; sourceTree = "<group>"; };
 		7B3323B31E7036BB00BB47BB /* RequisitionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequisitionTableViewController.h; sourceTree = "<group>"; };
 		7B3323B41E7036BB00BB47BB /* RequisitionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequisitionTableViewController.m; sourceTree = "<group>"; };
 		A4325C841E6E4C1D005AF214 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -248,6 +263,15 @@
 				A4F8BDEE1E6F80B3009A80ED /* RequisitionCellView_style_1.xib */,
 				7B3323B31E7036BB00BB47BB /* RequisitionTableViewController.h */,
 				7B3323B41E7036BB00BB47BB /* RequisitionTableViewController.m */,
+				7B0F49B11E70901700C6C999 /* RequisitionDetailViewController.h */,
+				7B0F49B21E70901700C6C999 /* RequisitionDetailViewController.m */,
+				7B0F49B31E70901700C6C999 /* RequisitionDetailView_style_1.xib */,
+				7B0F49B61E70977600C6C999 /* RequisitionDetailCell.h */,
+				7B0F49B71E70977600C6C999 /* RequisitionDetailCell.m */,
+				7B0F49B81E70977600C6C999 /* RequisitionDetailCellView_style_1.xib */,
+				7B0F49BB1E70A8A600C6C999 /* SupplierViewController.h */,
+				7B0F49BC1E70A8A600C6C999 /* SupplierViewController.m */,
+				7B0F49BD1E70A8A600C6C999 /* SupplierView_style_1.xib */,
 			);
 			path = Requisitions;
 			sourceTree = "<group>";
@@ -365,6 +389,9 @@
 				A4F8BDF01E6F80B3009A80ED /* RequisitionCellView_style_1.xib in Resources */,
 				A4E481F41E6E2A8A00D21E34 /* LoginView_style_1.xib in Resources */,
 				A4E481A91E6E27EF00D21E34 /* Assets.xcassets in Resources */,
+				7B0F49B51E70901700C6C999 /* RequisitionDetailView_style_1.xib in Resources */,
+				7B0F49BA1E70977600C6C999 /* RequisitionDetailCellView_style_1.xib in Resources */,
+				7B0F49BF1E70A8A600C6C999 /* SupplierView_style_1.xib in Resources */,
 				A4F8BDE81E6F7E92009A80ED /* RequisitionListView_style_1.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,7 +423,10 @@
 				A4E481A11E6E27EF00D21E34 /* AppDelegate.m in Sources */,
 				7B3323B51E7036BB00BB47BB /* RequisitionTableViewController.m in Sources */,
 				A4E4819E1E6E27EF00D21E34 /* main.m in Sources */,
+				7B0F49B41E70901700C6C999 /* RequisitionDetailViewController.m in Sources */,
 				A4E481E91E6E28CE00D21E34 /* SQLClient.m in Sources */,
+				7B0F49BE1E70A8A600C6C999 /* SupplierViewController.m in Sources */,
+				7B0F49B91E70977600C6C999 /* RequisitionDetailCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
