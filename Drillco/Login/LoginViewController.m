@@ -13,7 +13,7 @@
 NSString * const host = @"200.72.13.150";
 NSString * const user = @"sa";
 NSString * const pass = @"13871388";
-NSString * const db = @"Drillco";
+NSString * const db = @"Drillprus";
 
 @implementation LoginViewController
 

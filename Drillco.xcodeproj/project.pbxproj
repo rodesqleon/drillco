@@ -14,6 +14,12 @@
 		7B0F49BE1E70A8A600C6C999 /* SupplierViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0F49BC1E70A8A600C6C999 /* SupplierViewController.m */; };
 		7B0F49BF1E70A8A600C6C999 /* SupplierView_style_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B0F49BD1E70A8A600C6C999 /* SupplierView_style_1.xib */; };
 		7B3323B51E7036BB00BB47BB /* RequisitionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B3323B41E7036BB00BB47BB /* RequisitionTableViewController.m */; };
+		7B5B9F1B1E71DFE200D1B7B7 /* SupplierCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5B9F1A1E71DFE200D1B7B7 /* SupplierCell.m */; };
+		7B5B9F1D1E71DFF300D1B7B7 /* SupplierViewCell_style_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5B9F1C1E71DFF300D1B7B7 /* SupplierViewCell_style_1.xib */; };
+		7B5B9F211E71E94800D1B7B7 /* ProductDetialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5B9F1F1E71E94800D1B7B7 /* ProductDetialViewController.m */; };
+		7B5B9F221E71E94800D1B7B7 /* ProductDetialView_style_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5B9F201E71E94800D1B7B7 /* ProductDetialView_style_1.xib */; };
+		7B5B9F261E71EAB800D1B7B7 /* ProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5B9F241E71EAB800D1B7B7 /* ProductCell.m */; };
+		7B5B9F271E71EAB800D1B7B7 /* ProductCellView_style_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5B9F251E71EAB800D1B7B7 /* ProductCellView_style_1.xib */; };
 		A4325C851E6E4C1D005AF214 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4325C841E6E4C1D005AF214 /* QuartzCore.framework */; };
 		A4325C861E6E4F83005AF214 /* LoginAdminViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E481F81E6E46DA00D21E34 /* LoginAdminViewController.m */; };
 		A4325C871E6E4F87005AF214 /* LoginAdminView_style_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E481FB1E6E4ABD00D21E34 /* LoginAdminView_style_1.xib */; };
@@ -64,6 +70,15 @@
 		7B0F49BD1E70A8A600C6C999 /* SupplierView_style_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SupplierView_style_1.xib; sourceTree = "<group>"; };
 		7B3323B31E7036BB00BB47BB /* RequisitionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequisitionTableViewController.h; sourceTree = "<group>"; };
 		7B3323B41E7036BB00BB47BB /* RequisitionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequisitionTableViewController.m; sourceTree = "<group>"; };
+		7B5B9F191E71DFE200D1B7B7 /* SupplierCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupplierCell.h; sourceTree = "<group>"; };
+		7B5B9F1A1E71DFE200D1B7B7 /* SupplierCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupplierCell.m; sourceTree = "<group>"; };
+		7B5B9F1C1E71DFF300D1B7B7 /* SupplierViewCell_style_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SupplierViewCell_style_1.xib; sourceTree = "<group>"; };
+		7B5B9F1E1E71E94800D1B7B7 /* ProductDetialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductDetialViewController.h; sourceTree = "<group>"; };
+		7B5B9F1F1E71E94800D1B7B7 /* ProductDetialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductDetialViewController.m; sourceTree = "<group>"; };
+		7B5B9F201E71E94800D1B7B7 /* ProductDetialView_style_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductDetialView_style_1.xib; sourceTree = "<group>"; };
+		7B5B9F231E71EAB800D1B7B7 /* ProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductCell.h; sourceTree = "<group>"; };
+		7B5B9F241E71EAB800D1B7B7 /* ProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductCell.m; sourceTree = "<group>"; };
+		7B5B9F251E71EAB800D1B7B7 /* ProductCellView_style_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductCellView_style_1.xib; sourceTree = "<group>"; };
 		A4325C841E6E4C1D005AF214 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A4B7CDDB1E71442700EC849D /* libsybdb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsybdb.a; path = Drillco/Libs/SQLClient/libsybdb.a; sourceTree = "<group>"; };
 		A4E481991E6E27EF00D21E34 /* Drillco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drillco.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -259,21 +274,30 @@
 		A4F8BDE61E6F7E82009A80ED /* Requisitions */ = {
 			isa = PBXGroup;
 			children = (
-				A4F8BDE71E6F7E92009A80ED /* RequisitionListView_style_1.xib */,
 				A4F8BDEC1E6F80B3009A80ED /* RequisitionCell.h */,
 				A4F8BDED1E6F80B3009A80ED /* RequisitionCell.m */,
 				A4F8BDEE1E6F80B3009A80ED /* RequisitionCellView_style_1.xib */,
-				7B3323B31E7036BB00BB47BB /* RequisitionTableViewController.h */,
-				7B3323B41E7036BB00BB47BB /* RequisitionTableViewController.m */,
-				7B0F49B11E70901700C6C999 /* RequisitionDetailViewController.h */,
-				7B0F49B21E70901700C6C999 /* RequisitionDetailViewController.m */,
-				7B0F49B31E70901700C6C999 /* RequisitionDetailView_style_1.xib */,
 				7B0F49B61E70977600C6C999 /* RequisitionDetailCell.h */,
 				7B0F49B71E70977600C6C999 /* RequisitionDetailCell.m */,
 				7B0F49B81E70977600C6C999 /* RequisitionDetailCellView_style_1.xib */,
+				7B0F49B31E70901700C6C999 /* RequisitionDetailView_style_1.xib */,
+				7B0F49B11E70901700C6C999 /* RequisitionDetailViewController.h */,
+				7B0F49B21E70901700C6C999 /* RequisitionDetailViewController.m */,
+				A4F8BDE71E6F7E92009A80ED /* RequisitionListView_style_1.xib */,
+				7B3323B31E7036BB00BB47BB /* RequisitionTableViewController.h */,
+				7B3323B41E7036BB00BB47BB /* RequisitionTableViewController.m */,
+				7B5B9F191E71DFE200D1B7B7 /* SupplierCell.h */,
+				7B5B9F1A1E71DFE200D1B7B7 /* SupplierCell.m */,
+				7B0F49BD1E70A8A600C6C999 /* SupplierView_style_1.xib */,
+				7B5B9F1C1E71DFF300D1B7B7 /* SupplierViewCell_style_1.xib */,
 				7B0F49BB1E70A8A600C6C999 /* SupplierViewController.h */,
 				7B0F49BC1E70A8A600C6C999 /* SupplierViewController.m */,
-				7B0F49BD1E70A8A600C6C999 /* SupplierView_style_1.xib */,
+				7B5B9F1E1E71E94800D1B7B7 /* ProductDetialViewController.h */,
+				7B5B9F1F1E71E94800D1B7B7 /* ProductDetialViewController.m */,
+				7B5B9F201E71E94800D1B7B7 /* ProductDetialView_style_1.xib */,
+				7B5B9F231E71EAB800D1B7B7 /* ProductCell.h */,
+				7B5B9F241E71EAB800D1B7B7 /* ProductCell.m */,
+				7B5B9F251E71EAB800D1B7B7 /* ProductCellView_style_1.xib */,
 			);
 			path = Requisitions;
 			sourceTree = "<group>";
@@ -390,11 +414,14 @@
 				A4325C871E6E4F87005AF214 /* LoginAdminView_style_1.xib in Resources */,
 				A4F8BDF01E6F80B3009A80ED /* RequisitionCellView_style_1.xib in Resources */,
 				A4E481F41E6E2A8A00D21E34 /* LoginView_style_1.xib in Resources */,
+				7B5B9F1D1E71DFF300D1B7B7 /* SupplierViewCell_style_1.xib in Resources */,
 				A4E481A91E6E27EF00D21E34 /* Assets.xcassets in Resources */,
 				7B0F49B51E70901700C6C999 /* RequisitionDetailView_style_1.xib in Resources */,
+				7B5B9F271E71EAB800D1B7B7 /* ProductCellView_style_1.xib in Resources */,
 				7B0F49BA1E70977600C6C999 /* RequisitionDetailCellView_style_1.xib in Resources */,
 				7B0F49BF1E70A8A600C6C999 /* SupplierView_style_1.xib in Resources */,
 				A4F8BDE81E6F7E92009A80ED /* RequisitionListView_style_1.xib in Resources */,
+				7B5B9F221E71E94800D1B7B7 /* ProductDetialView_style_1.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,11 +451,14 @@
 				A4E481F21E6E29B400D21E34 /* LoginViewController.m in Sources */,
 				A4E481A11E6E27EF00D21E34 /* AppDelegate.m in Sources */,
 				7B3323B51E7036BB00BB47BB /* RequisitionTableViewController.m in Sources */,
+				7B5B9F261E71EAB800D1B7B7 /* ProductCell.m in Sources */,
 				A4E4819E1E6E27EF00D21E34 /* main.m in Sources */,
 				7B0F49B41E70901700C6C999 /* RequisitionDetailViewController.m in Sources */,
+				7B5B9F1B1E71DFE200D1B7B7 /* SupplierCell.m in Sources */,
 				A4E481E91E6E28CE00D21E34 /* SQLClient.m in Sources */,
 				7B0F49BE1E70A8A600C6C999 /* SupplierViewController.m in Sources */,
 				7B0F49B91E70977600C6C999 /* RequisitionDetailCell.m in Sources */,
+				7B5B9F211E71E94800D1B7B7 /* ProductDetialViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,6 +11,7 @@
 
 @interface RequisitionDetailViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic) NSArray *requisitionDetail;
+@property (nonatomic) NSArray *results;
 @property (nonatomic) NSString *provider_name;
 @property (nonatomic) NSString *requisition_id;
 @end

@@ -26,6 +26,7 @@ NSString * const r_db = @"Drilprue";
     [super viewDidLoad];
     [self.requisitionTableView registerNib:[UINib nibWithNibName:@"RequisitionCellView_style_1" bundle:nil] forCellReuseIdentifier:@"RequisitionIdentifier"];
     self.requisitionTableView.dataSource = self;
+    [self connect];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -62,7 +63,6 @@ NSString * const r_db = @"Drilprue";
         cell = [self.requisitionTableView dequeueReusableCellWithIdentifier:@"RequisitionIdentifier" forIndexPath:indexPath];
     }
     NSDictionary *requisitions = [self.requisition objectAtIndex:indexPath.row];
-    NSLog(@"%@", requisitions);
     cell.requisition_ID.text = requisitions[@"ID"];
     cell.requisition_VENDOR_ID.text = requisitions[@"VENDOR_ID"];
     cell.requisition_CURRENCY_ID.text = [requisitions[@"CURRENCY_ID"] stringByAppendingString:[NSString stringWithFormat:@" %@",requisitions[@"AMOUNT"]]];
@@ -79,25 +79,8 @@ NSString * const r_db = @"Drilprue";
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *info = [self.requisition objectAtIndex:indexPath.row];
-    NSString *query = [NSString stringWithFormat:@"select pl.LINE_NO as [LINEA], pl.PART_ID as [CODIGO PRODUCTO], (case isnull(p.description,'') when '' then CONVERT(VARCHAR(200),CONVERT(VARBINARY(200),pb.bits)) else p.DESCRIPTION end) as [PRODUCTO], pl.ORDER_QTY as [CANTIDAD], pl.UNIT_PRICE as [PRECIO UNITARIO], pl.ORDER_QTY * pl.UNIT_PRICE as [TOTAL FINAL] from PURC_REQ_LINE pl,PURC_REQ_LN_BINARY pb, PART p where pl.PURC_REQ_ID = '%@' and pl.PURC_REQ_ID *= pb.PURC_REQ_ID and pl.LINE_NO *= pb.PURC_REQ_LINE_NO and pl.PART_ID *= p.id order by pl.line_no", info[@"ID"]];
-    SQLClient* client = [SQLClient sharedInstance];
-    [client connect:r_host username:r_user password:r_pass database:r_db completion:^(BOOL success) {
-        if (success)
-        {
-            [client execute:query completion:^(NSArray* results) {
-                RequisitionDetailViewController * requisitionDetail_vc = [[RequisitionDetailViewController alloc] initWithNibName:@"RequisitionDetailView_style_1" bundle:nil];
-                requisitionDetail_vc.requisitionDetail = results[0];
-                requisitionDetail_vc.provider_name = info[@"NAME"];
-                requisitionDetail_vc.requisition_id = info[@"ID"];
-                [[self navigationController] pushViewController:requisitionDetail_vc animated:YES];
-                [client disconnect];
-                
-            }];
-        }
-        else{
-            NSLog(@"An error ocurr");
-        }
-    }];
+    self.info = info;
+    [self execute:[NSString stringWithFormat:@"select pl.LINE_NO as [LINEA], pl.PART_ID as [CODIGO PRODUCTO], (case isnull(p.description,'') when '' then CONVERT(VARCHAR(200),CONVERT(VARBINARY(200),pb.bits)) else p.DESCRIPTION end) as [PRODUCTO], pl.ORDER_QTY as [CANTIDAD], pl.UNIT_PRICE as [PRECIO UNITARIO], pl.ORDER_QTY * pl.UNIT_PRICE as [TOTAL FINAL] from PURC_REQ_LINE pl,PURC_REQ_LN_BINARY pb, PART p where pl.PURC_REQ_ID = '%@' and pl.PURC_REQ_ID *= pb.PURC_REQ_ID and pl.LINE_NO *= pb.PURC_REQ_LINE_NO and pl.PART_ID *= p.id order by pl.line_no", info[@"ID"]] Flow:nil];
     [self.requisitionTableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -125,6 +108,11 @@ NSString * const r_db = @"Drilprue";
     [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
         self.view.userInteractionEnabled = YES;
         self.requisition = results;
+        RequisitionDetailViewController * requisitionDetail_vc = [[RequisitionDetailViewController alloc] initWithNibName:@"RequisitionDetailView_style_1" bundle:nil];
+        requisitionDetail_vc.requisitionDetail = results[0];
+        requisitionDetail_vc.provider_name = self.info[@"NAME"];
+        requisitionDetail_vc.requisition_id = self.info[@"ID"];
+        [[self navigationController] pushViewController:requisitionDetail_vc animated:YES];
     }];
 }
 

@@ -12,4 +12,5 @@
 @interface RequisitionTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic) NSString * username;
 @property (nonatomic) NSArray * requisition;
+@property (nonatomic) NSDictionary * info;
 @end
