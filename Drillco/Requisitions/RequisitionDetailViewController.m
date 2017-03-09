@@ -46,7 +46,6 @@ NSString * const rd_db = @"Drilprue";
 - (IBAction)goToSupplier:(id)sender {
     NSString *query = [NSString stringWithFormat:@"select top 5 p.ID, p.total_amt_ordered, P.REQUISITION_DATE, v.NAME from PURC_REQUISITION p, VENDOR v where p.vendor_id = v.id and p.status = 'C' and v.NAME = '%@' order by REQUISITION_DATE", self.provider_name];
     SQLClient* client = [SQLClient sharedInstance];
-    client.delegate = self;
     [client connect:rd_host username:rd_user password:rd_pass database:rd_db completion:^(BOOL success) {
         if (success)
         {

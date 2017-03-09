@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SQLClient.h"
 
-@interface RequisitionTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, SQLClientDelegate>
+@interface RequisitionTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic) NSString * username;
 @property (nonatomic) NSArray * requisition;
 @end

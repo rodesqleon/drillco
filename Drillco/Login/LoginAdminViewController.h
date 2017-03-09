@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SQLClient.h"
 
-@interface LoginAdminViewController : UIViewController <UITextFieldDelegate,SQLClientDelegate>
+@interface LoginAdminViewController : UIViewController <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *username_txt;
 @property (weak, nonatomic) IBOutlet UITextField *password_txt;
 

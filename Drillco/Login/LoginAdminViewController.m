@@ -14,7 +14,7 @@
 NSString * const khost = @"200.72.13.150";
 NSString * const kuser = @"sa";
 NSString * const kpass = @"13871388";
-NSString * const kdb = @"Drilprue";
+NSString * const kdb = @"Drillco";
 
 @implementation LoginAdminViewController
 
@@ -47,7 +47,6 @@ NSString * const kdb = @"Drilprue";
     if(self.username_txt.text.length > 0 && self.password_txt.text.length > 0){
         NSString *query = [@"SELECT * FROM DRILL_MAE_USUARIO_MOVIL WHERE id='" stringByAppendingString:[NSString stringWithFormat:@"%@' AND password='%@'", self.username_txt.text, self.password_txt.text]];
         SQLClient* client = [SQLClient sharedInstance];
-        client.delegate = self;
         [client connect:khost username:kuser password:kpass database:kdb completion:^(BOOL success) {
             if (success)
             {
@@ -69,7 +68,7 @@ NSString * const kdb = @"Drilprue";
 - (void)didLogin:(NSArray *)results{
     if([results count] > 0){
         if([results[0] count] > 0){
-            NSLog(@"Usuario válido");
+            NSLog(@"%@", results);
         }else{
             NSLog(@"Usuario inválido");
         }

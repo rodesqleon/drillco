@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SQLClient.h"
 
-@interface RequisitionDetailViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, SQLClientDelegate>
+@interface RequisitionDetailViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic) NSArray *requisitionDetail;
 @property (nonatomic) NSString *provider_name;
 @property (nonatomic) NSString *requisition_id;

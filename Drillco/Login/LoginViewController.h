@@ -12,9 +12,10 @@
 #import "RequisitionTableViewController.h"
 
 
-@interface LoginViewController : UIViewController <SQLClientDelegate>
+@interface LoginViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITextField *username_txt;
 @property (weak, nonatomic) IBOutlet UITextField *password_txt;
+@property (nonatomic) NSArray * results;
 @property (nonatomic) LoginAdminViewController *loginAdmin_vc;
 @property (nonatomic) RequisitionTableViewController *requisitionList_vc;
 
