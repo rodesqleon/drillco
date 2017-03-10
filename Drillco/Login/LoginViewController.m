@@ -13,7 +13,7 @@
 NSString * const host = @"200.72.13.150";
 NSString * const user = @"sa";
 NSString * const pass = @"13871388";
-NSString * const db = @"Drillprus";
+NSString * const db = @"Drillprue";
 
 @implementation LoginViewController
 
@@ -31,12 +31,14 @@ NSString * const db = @"Drillprus";
 - (void)viewWillAppear:(BOOL)animated{
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.navigationBar.backItem setTitle:@""];
 
 }
 
 - (IBAction)doLogin:(id)sender {
+    
     //if(self.username_txt.text.length > 0 && self.password_txt.text.length > 0){
-        [self execute:[@"SELECT * FROM DRILL_MAE_USUARIO_MOVIL WHERE id='" stringByAppendingString:[NSString stringWithFormat:@"%@' AND password='%@'", self.username_txt.text, self.password_txt.text]] Flow:@"login"];
+        [self execute:[@"select u.USER_ID, d.PASSWORD from DRILL_MAE_USUARIO_MOVIL d, GROUP_USER u where u.USER_ID='" stringByAppendingString:[NSString stringWithFormat:@"%@' AND d.PASSWORD='%@'", self.username_txt.text, self.password_txt.text]] Flow:@"login"];
     //}else{
         //ALERT
     //}
@@ -45,7 +47,7 @@ NSString * const db = @"Drillprus";
 - (void)didLogin:(NSArray *)results{
     if([results count] > 0){
         if([results[0] count] > 0){
-            [self execute:[NSString stringWithFormat:@"select P.ID, v.NAME, P.VENDOR_ID, pr.CURRENCY_ID, P.DESIRED_RECV_DATE, PR.AMOUNT from PURC_REQUISITION p, VENDOR v, PURC_REQ_CURR pr where pr.currency_id = P.CURRENCY_ID and p.ASSIGNED_TO = 'HSEBASTI' and p.STATUS = 'I' and p.VENDOR_ID = v.ID and p.ID = pr.PURC_REQ_ID order by P.REQUISITION_DATE"] Flow:@"requisitionlist"];
+            [self execute:[NSString stringWithFormat:@"select P.ID, v.NAME, P.VENDOR_ID, pr.CURRENCY_ID, P.DESIRED_RECV_DATE, PR.AMOUNT from PURC_REQUISITION p, VENDOR v, PURC_REQ_CURR pr where pr.currency_id = P.CURRENCY_ID and p.ASSIGNED_TO = '%@' and p.STATUS = 'I' and p.VENDOR_ID = v.ID and p.ID = pr.PURC_REQ_ID order by P.REQUISITION_DATE", self.username_txt.text] Flow:@"requisitionlist"];
         }else{
             NSLog(@"Usuario inválido");
         }

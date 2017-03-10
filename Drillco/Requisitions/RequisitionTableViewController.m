@@ -8,12 +8,6 @@
 
 #import "RequisitionTableViewController.h"
 #import "RequisitionCell.h"
-#import "RequisitionDetailViewController.h"
-
-NSString * const r_host = @"200.72.13.150";
-NSString * const r_user = @"sa";
-NSString * const r_pass = @"13871388";
-NSString * const r_db = @"Drilprue";
 
 @interface RequisitionTableViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *requisitionTableView;
@@ -78,12 +72,20 @@ NSString * const r_db = @"Drilprue";
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *info = [self.requisition objectAtIndex:indexPath.row];
-    self.info = info;
-    [self execute:[NSString stringWithFormat:@"select pl.LINE_NO as [LINEA], pl.PART_ID as [CODIGO PRODUCTO], (case isnull(p.description,'') when '' then CONVERT(VARCHAR(200),CONVERT(VARBINARY(200),pb.bits)) else p.DESCRIPTION end) as [PRODUCTO], pl.ORDER_QTY as [CANTIDAD], pl.UNIT_PRICE as [PRECIO UNITARIO], pl.ORDER_QTY * pl.UNIT_PRICE as [TOTAL FINAL] from PURC_REQ_LINE pl,PURC_REQ_LN_BINARY pb, PART p where pl.PURC_REQ_ID = '%@' and pl.PURC_REQ_ID *= pb.PURC_REQ_ID and pl.LINE_NO *= pb.PURC_REQ_LINE_NO and pl.PART_ID *= p.id order by pl.line_no", info[@"ID"]] Flow:nil];
+    NSDictionary *requisitions = [self.requisition objectAtIndex:indexPath.row];
+    self.info = requisitions;
+    [self execute:[NSString stringWithFormat:@"select pl.LINE_NO as [LINEA], pl.PART_ID as [CODIGO PRODUCTO], (case isnull(p.description,'') when '' then CONVERT(VARCHAR(200),CONVERT(VARBINARY(200),pb.bits)) else p.DESCRIPTION end) as [PRODUCTO], pl.ORDER_QTY as [CANTIDAD], pl.UNIT_PRICE as [PRECIO UNITARIO], pl.ORDER_QTY * pl.UNIT_PRICE as [TOTAL FINAL] from PURC_REQ_LINE pl,PURC_REQ_LN_BINARY pb, PART p where pl.PURC_REQ_ID = '%@' and pl.PURC_REQ_ID *= pb.PURC_REQ_ID and pl.LINE_NO *= pb.PURC_REQ_LINE_NO and pl.PART_ID *= p.id order by pl.line_no", self.info[@"ID"]] Flow:nil];
     [self.requisitionTableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+- (void) didRequisitionDetail{
+    self.requisitionDetail_vc = [[RequisitionDetailViewController alloc] initWithNibName:@"RequisitionDetailView_style_1" bundle:nil];
+    self.requisitionDetail_vc.requisitionDetail = self.requisition[0];
+    self.requisitionDetail_vc.provider_name = self.info[@"NAME"];
+    self.requisitionDetail_vc.requisition_id = self.info[@"ID"];
+    [self.requisitionDetail_vc.navigationController.navigationBar.backItem setTitle:@""];
+    [[self navigationController] pushViewController:self.requisitionDetail_vc animated:YES];
+}
 
 - (void)connect
 {
@@ -108,11 +110,8 @@ NSString * const r_db = @"Drilprue";
     [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
         self.view.userInteractionEnabled = YES;
         self.requisition = results;
-        RequisitionDetailViewController * requisitionDetail_vc = [[RequisitionDetailViewController alloc] initWithNibName:@"RequisitionDetailView_style_1" bundle:nil];
-        requisitionDetail_vc.requisitionDetail = results[0];
-        requisitionDetail_vc.provider_name = self.info[@"NAME"];
-        requisitionDetail_vc.requisition_id = self.info[@"ID"];
-        [[self navigationController] pushViewController:requisitionDetail_vc animated:YES];
+        [self didRequisitionDetail];
+        [[SQLClient sharedInstance] disconnect];
     }];
 }
 

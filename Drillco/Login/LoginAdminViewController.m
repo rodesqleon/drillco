@@ -11,11 +11,6 @@
 @interface LoginAdminViewController ()
 @end
 
-NSString * const khost = @"200.72.13.150";
-NSString * const kuser = @"sa";
-NSString * const kpass = @"13871388";
-NSString * const kdb = @"Drillco";
-
 @implementation LoginAdminViewController
 
 - (void)viewDidLoad {
@@ -44,31 +39,14 @@ NSString * const kdb = @"Drillco";
 }
 
 - (IBAction)doLogin:(id)sender {
-    if(self.username_txt.text.length > 0 && self.password_txt.text.length > 0){
-        NSString *query = [@"SELECT * FROM DRILL_MAE_USUARIO_MOVIL WHERE id='" stringByAppendingString:[NSString stringWithFormat:@"%@' AND password='%@'", self.username_txt.text, self.password_txt.text]];
-        SQLClient* client = [SQLClient sharedInstance];
-        [client connect:khost username:kuser password:kpass database:kdb completion:^(BOOL success) {
-            if (success)
-            {
-                [client execute:query completion:^(NSArray* results) {
-                    [self didLogin:results];
-                    [client disconnect];
-                }];
-            }
-            else{
-                NSLog(@"An error ocurr");
-            }
-        }];
-    }else{
-        //ALERT
-    }
+    [self execute:[@"select u.USER_ID, d.PASSWORD from DRILL_MAE_USUARIO_MOVIL d, GROUP_USER u where u.USER_ID='" stringByAppendingString:[NSString stringWithFormat:@"%@' AND d.PASSWORD='%@'", self.username_txt.text, self.password_txt.text]] Flow:@"login"];
 
 }
 
 - (void)didLogin:(NSArray *)results{
     if([results count] > 0){
         if([results[0] count] > 0){
-            NSLog(@"%@", results);
+            [self execute:[NSString stringWithFormat:@"select P.ID, v.NAME, P.VENDOR_ID, pr.CURRENCY_ID, P.DESIRED_RECV_DATE, PR.AMOUNT from PURC_REQUISITION p, VENDOR v, PURC_REQ_CURR pr where pr.currency_id = P.CURRENCY_ID and p.ASSIGNED_TO = '%@' and p.STATUS = 'I' and p.VENDOR_ID = v.ID and p.ID = pr.PURC_REQ_ID order by P.REQUISITION_DATE", self.username_txt.text] Flow:@"requisitionlist"];
         }else{
             NSLog(@"Usuario inválido");
         }
@@ -77,25 +55,65 @@ NSString * const kdb = @"Drillco";
     }
 }
 
-#pragma mark - SQLClientDelegate
-
-//Required
-- (void)error:(NSString*)error code:(int)code severity:(int)severity
-{
-    NSLog(@"Error #%d: %@ (Severity %d)", code, error, severity);
-    [[[UIAlertView alloc] initWithTitle:@"Error" message:error delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+- (void)didRequisitionList:(NSArray *)results{
+    self.requisitionList_vc = [[RequisitionTableViewController alloc] initWithNibName:@"RequisitionListView_style_1" bundle:nil];
+    self.requisitionList_vc.username = self.username_txt.text;
+    self.requisitionList_vc.requisition = results[0];
+    [[self navigationController] pushViewController:self.requisitionList_vc animated:YES];
 }
 
-//Optional
-- (void)message:(NSString*)message
+
+
+- (void)connect
 {
+    SQLClient* client = [SQLClient sharedInstance];
+    self.view.userInteractionEnabled = NO;
+    [client connect:@"200.72.13.150" username:@"sa" password:@"13871388" database:@"Drillcoprue" completion:^(BOOL success) {
+        self.view.userInteractionEnabled = YES;
+        if (success) {
+            //			[self execute];
+        }
+    }];
+}
+
+- (void)execute:(NSString*)sql Flow:(NSString*)flow
+{
+    if (![SQLClient sharedInstance].isConnected) {
+        [self connect];
+        return;
+    }
+    
+    self.view.userInteractionEnabled = NO;
+    [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
+        self.view.userInteractionEnabled = YES;
+        self.results = results;
+        if([flow isEqualToString:@"login"]){
+            [self didLogin:self.results];
+        }else{
+            [self didRequisitionList:self.results];
+        }
+    }];
+}
+
+#pragma mark - SQLClientErrorNotification
+
+- (void)error:(NSNotification*)notification
+{
+    NSNumber* code = notification.userInfo[SQLClientCodeKey];
+    NSString* message = notification.userInfo[SQLClientMessageKey];
+    NSNumber* severity = notification.userInfo[SQLClientSeverityKey];
+    
+    NSLog(@"Error #%@: %@ (Severity %@)", code, message, severity);
+    [[[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+}
+
+#pragma mark - SQLClientMessageNotification
+
+- (void)message:(NSNotification*)notification
+{
+    NSString* message = notification.userInfo[SQLClientMessageKey];
     NSLog(@"Message: %@", message);
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    //hides keyboard when another part of layout was touched
-    [self.view endEditing:YES];
-    [super touchesBegan:touches withEvent:event];
-}
 
 @end
