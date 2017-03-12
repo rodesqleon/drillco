@@ -43,6 +43,24 @@ typedef void(^myCompletion) (BOOL);
 
 }
 
+- (void) requisitionAlert:(NSString *) text{
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:@"Detalle requisición"
+                                 message:text
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* yesButton = [UIAlertAction
+                                actionWithTitle:@"OK"
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action) {
+                                    
+                                }];
+    [alert addAction:yesButton];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -109,8 +127,10 @@ typedef void(^myCompletion) (BOOL);
             [self.spinner hidesWhenStopped];
             [self didSelectSupplier];
         }else{
+            NSLog(@"finished");
             [self.spinner stopAnimating];
             [self.spinner hidesWhenStopped];
+            [self requisitionAlert:@"Un error ha ocurrido, favor intente nuevamente."];
         }
     }];
 
@@ -156,6 +176,7 @@ typedef void(^myCompletion) (BOOL);
                                         }else{
                                             [self.spinner stopAnimating];
                                             [self.spinner hidesWhenStopped];
+                                            [self requisitionAlert:@"Un error ha ocurrido, favor intente nuevamente."];
                                         }
                                     }];
                                 }];
@@ -200,6 +221,7 @@ typedef void(^myCompletion) (BOOL);
                                         }else{
                                             [self.spinner stopAnimating];
                                             [self.spinner hidesWhenStopped];
+                                            [self requisitionAlert:@"Un error ha ocurrido, favor intente nuevamente."];
                                         }
                                     }];
                                 }];
@@ -269,6 +291,9 @@ typedef void(^myCompletion) (BOOL);
             [self didSelectProduct];
         }else{
             NSLog(@"finished");
+            [self.spinner stopAnimating];
+            [self.spinner hidesWhenStopped];
+            [self requisitionAlert:@"Un error ha ocurrido, favor intente nuevamente."];
         }
     }];
     [self.requisitionDetailTableView deselectRowAtIndexPath:indexPath animated:YES];

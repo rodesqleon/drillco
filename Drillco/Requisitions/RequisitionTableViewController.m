@@ -50,6 +50,23 @@ typedef void(^myCompletion) (BOOL);
     [self goForRequisitions];
 }
 
+- (void) requisitionAlert:(NSString *) text{
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:@"Requisiciones"
+                                 message:text
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* yesButton = [UIAlertAction
+                                actionWithTitle:@"OK"
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action) {
+                                    
+                                }];
+    [alert addAction:yesButton];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
 - (void) goForRequisitions{
     [self dbCallRequisition:^(BOOL finished){
         if(finished){
@@ -61,6 +78,7 @@ typedef void(^myCompletion) (BOOL);
             NSLog(@"finished");
             [self.spinner stopAnimating];
             [self.spinner hidesWhenStopped];
+            [self requisitionAlert:@"Un error ha ocurrido, favor tire hacía abajo para refrescar."];
         }
     }];
 }
@@ -185,6 +203,7 @@ typedef void(^myCompletion) (BOOL);
             NSLog(@"finished");
             [self.spinner stopAnimating];
             [self.spinner hidesWhenStopped];
+            [self requisitionAlert:@"Un error ha ocurrido, intente nuevamente."];
         }
     }];
     [self.requisitionTableView deselectRowAtIndexPath:indexPath animated:YES];
