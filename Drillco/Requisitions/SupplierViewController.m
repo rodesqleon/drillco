@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"PROVEEDOR";
+    self.title = @"Proveedor";
     [self.supplierDetailTableView registerNib:[UINib nibWithNibName:@"SupplierViewCell_style_1" bundle:nil] forCellReuseIdentifier:@"SupplierIdentifier"];
     self.supplierDetailTableView.dataSource = self;
 }
@@ -27,8 +27,6 @@
     [super viewWillAppear:animated];
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.translucent = NO;
-    [self.navigationController.navigationBar.backItem setTitle:@""];
-    self.navigationController.navigationBar.topItem.title = @"";
     self.supplierName_lbl.text = self.supplierName;
 }
 

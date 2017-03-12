@@ -33,27 +33,36 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROVIDER_NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DTV-pm-KOd">
-                            <rect key="frame" x="113.5" y="5" width="148" height="30"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                            <rect key="frame" x="86" y="12.5" width="113" height="15.5"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                             <color key="textColor" red="0.0" green="0.40000000000000002" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s4e-Ga-mx4">
-                            <rect key="frame" x="113.5" y="5" width="148" height="30"/>
+                            <rect key="frame" x="86" y="5" width="113" height="30"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                             <connections>
                                 <action selector="goToSupplier:" destination="-1" eventType="touchUpInside" id="Kw8-DM-8Wc"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nombre:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gx4-ES-CZi">
+                            <rect key="frame" x="8" y="8" width="70" height="20"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="DTV-pm-KOd" firstAttribute="centerX" secondItem="6g6-z5-MLJ" secondAttribute="centerX" id="BsO-P8-rUY"/>
-                        <constraint firstItem="DTV-pm-KOd" firstAttribute="centerY" secondItem="6g6-z5-MLJ" secondAttribute="centerY" id="FCX-Y0-1hj"/>
-                        <constraint firstItem="s4e-Ga-mx4" firstAttribute="height" secondItem="DTV-pm-KOd" secondAttribute="height" id="KhL-hz-x7T"/>
-                        <constraint firstItem="s4e-Ga-mx4" firstAttribute="centerX" secondItem="DTV-pm-KOd" secondAttribute="centerX" id="M1D-Uh-eng"/>
-                        <constraint firstItem="s4e-Ga-mx4" firstAttribute="centerY" secondItem="DTV-pm-KOd" secondAttribute="centerY" id="oPX-l3-rNq"/>
+                        <constraint firstItem="s4e-Ga-mx4" firstAttribute="leading" secondItem="DTV-pm-KOd" secondAttribute="leading" id="2Qn-zW-SQy"/>
+                        <constraint firstItem="DTV-pm-KOd" firstAttribute="leading" secondItem="Gx4-ES-CZi" secondAttribute="trailing" constant="8" id="30i-3i-XmI"/>
+                        <constraint firstItem="s4e-Ga-mx4" firstAttribute="centerX" secondItem="DTV-pm-KOd" secondAttribute="centerX" id="4PF-Sv-KRB"/>
+                        <constraint firstItem="s4e-Ga-mx4" firstAttribute="trailing" secondItem="DTV-pm-KOd" secondAttribute="trailing" id="7CJ-9D-MYH"/>
+                        <constraint firstItem="DTV-pm-KOd" firstAttribute="bottom" secondItem="Gx4-ES-CZi" secondAttribute="bottom" id="DmE-11-nrE"/>
+                        <constraint firstItem="Gx4-ES-CZi" firstAttribute="top" secondItem="6g6-z5-MLJ" secondAttribute="top" constant="8" id="HMn-We-vIr"/>
                         <constraint firstAttribute="height" constant="40" id="vvl-nS-aIf"/>
-                        <constraint firstItem="s4e-Ga-mx4" firstAttribute="width" secondItem="DTV-pm-KOd" secondAttribute="width" id="vy4-Rc-bYl"/>
+                        <constraint firstItem="Gx4-ES-CZi" firstAttribute="leading" secondItem="6g6-z5-MLJ" secondAttribute="leading" constant="8" id="xwA-kR-Zzd"/>
+                        <constraint firstItem="s4e-Ga-mx4" firstAttribute="centerY" secondItem="DTV-pm-KOd" secondAttribute="centerY" id="yDS-aA-JjG"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i4R-Lk-Eru">

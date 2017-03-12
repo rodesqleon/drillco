@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"HISTORIA";
+    self.title = @"Historia";
     [self.productTabelView registerNib:[UINib nibWithNibName:@"ProductCellView_style_1" bundle:nil] forCellReuseIdentifier:@"ProductIdentifier"];
     self.productTabelView.dataSource = self;
 }
@@ -28,8 +28,6 @@
     [super viewWillAppear:animated];
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.translucent = NO;
-    [self.navigationController.navigationBar.backItem setTitle:@""];
-    self.navigationController.navigationBar.topItem.title = @"";
     self.productName_lbl.text = self.productName;
 }
 
@@ -55,7 +53,6 @@
         cell = [self.productTabelView dequeueReusableCellWithIdentifier:@"ProductIdentifier" forIndexPath:indexPath];
     }
     NSDictionary *product = [self.products objectAtIndex:indexPath.row];
-    NSLog(@"%@", product);
     cell.productMONEY.text = [product[@"MONEDA"] description];
     cell.productSINGLE_AMOUNT.text = [product[@"PRECIO UNIT"] description];
     cell.productSUPPLIER_NAME.text = [product[@"NOMBRE PROVEEDOR"] description];

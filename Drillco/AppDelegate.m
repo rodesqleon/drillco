@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 @interface AppDelegate ()
 
@@ -20,6 +21,11 @@
     self.login_vc = [[LoginViewController alloc] initWithNibName:@"LoginView_style_1" bundle:nil];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.login_vc];
     navController.navigationBarHidden = YES;
+    
+    [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0xFBC02D)];
+    [[UINavigationBar appearance] setTintColor:UIColorFromRGB(0x6C1F73)];
+    [navController.navigationBar
+     setTitleTextAttributes:@{NSForegroundColorAttributeName : UIColorFromRGB(0x6C1F73)}];
     self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
     return YES;

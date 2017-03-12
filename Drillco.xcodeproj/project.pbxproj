@@ -23,6 +23,10 @@
 		A4325C851E6E4C1D005AF214 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4325C841E6E4C1D005AF214 /* QuartzCore.framework */; };
 		A4325C861E6E4F83005AF214 /* LoginAdminViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E481F81E6E46DA00D21E34 /* LoginAdminViewController.m */; };
 		A4325C871E6E4F87005AF214 /* LoginAdminView_style_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E481FB1E6E4ABD00D21E34 /* LoginAdminView_style_1.xib */; };
+		A46DC3B21E74859900A62AE4 /* RequisitionApproveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A46DC3B01E74859900A62AE4 /* RequisitionApproveViewController.m */; };
+		A46DC3B31E74859900A62AE4 /* RequisitionApproveView_style_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = A46DC3B11E74859900A62AE4 /* RequisitionApproveView_style_1.xib */; };
+		A46DC3B91E74ED0900A62AE4 /* RequisitionDeclineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A46DC3B71E74ED0900A62AE4 /* RequisitionDeclineViewController.m */; };
+		A46DC3BA1E74ED0900A62AE4 /* RequisitionDeclineView_style_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = A46DC3B81E74ED0900A62AE4 /* RequisitionDeclineView_style_1.xib */; };
 		A4B7CDDC1E71442700EC849D /* libsybdb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B7CDDB1E71442700EC849D /* libsybdb.a */; };
 		A4E4819E1E6E27EF00D21E34 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E4819D1E6E27EF00D21E34 /* main.m */; };
 		A4E481A11E6E27EF00D21E34 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E481A01E6E27EF00D21E34 /* AppDelegate.m */; };
@@ -80,6 +84,12 @@
 		7B5B9F241E71EAB800D1B7B7 /* ProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductCell.m; sourceTree = "<group>"; };
 		7B5B9F251E71EAB800D1B7B7 /* ProductCellView_style_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductCellView_style_1.xib; sourceTree = "<group>"; };
 		A4325C841E6E4C1D005AF214 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A46DC3AF1E74859900A62AE4 /* RequisitionApproveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequisitionApproveViewController.h; sourceTree = "<group>"; };
+		A46DC3B01E74859900A62AE4 /* RequisitionApproveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequisitionApproveViewController.m; sourceTree = "<group>"; };
+		A46DC3B11E74859900A62AE4 /* RequisitionApproveView_style_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequisitionApproveView_style_1.xib; sourceTree = "<group>"; };
+		A46DC3B61E74ED0900A62AE4 /* RequisitionDeclineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequisitionDeclineViewController.h; sourceTree = "<group>"; };
+		A46DC3B71E74ED0900A62AE4 /* RequisitionDeclineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequisitionDeclineViewController.m; sourceTree = "<group>"; };
+		A46DC3B81E74ED0900A62AE4 /* RequisitionDeclineView_style_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequisitionDeclineView_style_1.xib; sourceTree = "<group>"; };
 		A4B7CDDB1E71442700EC849D /* libsybdb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsybdb.a; path = Drillco/Libs/SQLClient/libsybdb.a; sourceTree = "<group>"; };
 		A4E481991E6E27EF00D21E34 /* Drillco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drillco.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4E4819D1E6E27EF00D21E34 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -298,6 +308,12 @@
 				7B5B9F231E71EAB800D1B7B7 /* ProductCell.h */,
 				7B5B9F241E71EAB800D1B7B7 /* ProductCell.m */,
 				7B5B9F251E71EAB800D1B7B7 /* ProductCellView_style_1.xib */,
+				A46DC3AF1E74859900A62AE4 /* RequisitionApproveViewController.h */,
+				A46DC3B01E74859900A62AE4 /* RequisitionApproveViewController.m */,
+				A46DC3B11E74859900A62AE4 /* RequisitionApproveView_style_1.xib */,
+				A46DC3B61E74ED0900A62AE4 /* RequisitionDeclineViewController.h */,
+				A46DC3B71E74ED0900A62AE4 /* RequisitionDeclineViewController.m */,
+				A46DC3B81E74ED0900A62AE4 /* RequisitionDeclineView_style_1.xib */,
 			);
 			path = Requisitions;
 			sourceTree = "<group>";
@@ -370,7 +386,7 @@
 					A4E481981E6E27EF00D21E34 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 53337WJ5R4;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					A4E481B11E6E27F000D21E34 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -420,7 +436,9 @@
 				7B5B9F271E71EAB800D1B7B7 /* ProductCellView_style_1.xib in Resources */,
 				7B0F49BA1E70977600C6C999 /* RequisitionDetailCellView_style_1.xib in Resources */,
 				7B0F49BF1E70A8A600C6C999 /* SupplierView_style_1.xib in Resources */,
+				A46DC3B31E74859900A62AE4 /* RequisitionApproveView_style_1.xib in Resources */,
 				A4F8BDE81E6F7E92009A80ED /* RequisitionListView_style_1.xib in Resources */,
+				A46DC3BA1E74ED0900A62AE4 /* RequisitionDeclineView_style_1.xib in Resources */,
 				7B5B9F221E71E94800D1B7B7 /* ProductDetialView_style_1.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -447,6 +465,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4F8BDEF1E6F80B3009A80ED /* RequisitionCell.m in Sources */,
+				A46DC3B21E74859900A62AE4 /* RequisitionApproveViewController.m in Sources */,
 				A4325C861E6E4F83005AF214 /* LoginAdminViewController.m in Sources */,
 				A4E481F21E6E29B400D21E34 /* LoginViewController.m in Sources */,
 				A4E481A11E6E27EF00D21E34 /* AppDelegate.m in Sources */,
@@ -455,6 +474,7 @@
 				A4E4819E1E6E27EF00D21E34 /* main.m in Sources */,
 				7B0F49B41E70901700C6C999 /* RequisitionDetailViewController.m in Sources */,
 				7B5B9F1B1E71DFE200D1B7B7 /* SupplierCell.m in Sources */,
+				A46DC3B91E74ED0900A62AE4 /* RequisitionDeclineViewController.m in Sources */,
 				A4E481E91E6E28CE00D21E34 /* SQLClient.m in Sources */,
 				7B0F49BE1E70A8A600C6C999 /* SupplierViewController.m in Sources */,
 				7B0F49B91E70977600C6C999 /* RequisitionDetailCell.m in Sources */,
@@ -588,8 +608,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 53337WJ5R4;
+				ENABLE_BITCODE = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = Drillco/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
@@ -601,6 +624,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rodev.Drillco;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f9dbe6ca-79c5-4ae5-b421-4015f0cf0bfd";
+				PROVISIONING_PROFILE_SPECIFIER = Distribution_Drillco_v1.0.0;
 				STRIP_INSTALLED_PRODUCT = YES;
 			};
 			name = Debug;
@@ -609,8 +634,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 53337WJ5R4;
+				ENABLE_BITCODE = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = Drillco/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
@@ -622,6 +650,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rodev.Drillco;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f9dbe6ca-79c5-4ae5-b421-4015f0cf0bfd";
+				PROVISIONING_PROFILE_SPECIFIER = Distribution_Drillco_v1.0.0;
 				STRIP_INSTALLED_PRODUCT = YES;
 			};
 			name = Release;
