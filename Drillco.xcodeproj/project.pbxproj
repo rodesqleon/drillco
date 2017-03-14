@@ -610,8 +610,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Rodrigo Esquivel (53337WJ5R4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rodrigo Esquivel (53337WJ5R4)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rodrigo Esquivel (65KU45MAAS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rodrigo Esquivel (65KU45MAAS)";
 				DEVELOPMENT_TEAM = 53337WJ5R4;
 				ENABLE_BITCODE = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -625,8 +625,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rodev.Drillco;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f9dbe6ca-79c5-4ae5-b421-4015f0cf0bfd";
-				PROVISIONING_PROFILE_SPECIFIER = Distribution_Drillco_v1.0.0;
+				PROVISIONING_PROFILE = "5e1a584f-08f4-4935-8cf3-5a8042c8d792";
+				PROVISIONING_PROFILE_SPECIFIER = DRILLCO_DEVELOPMENT;
 				STRIP_INSTALLED_PRODUCT = YES;
 			};
 			name = Debug;
@@ -637,8 +637,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Rodrigo Esquivel (53337WJ5R4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rodrigo Esquivel (53337WJ5R4)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rodrigo Esquivel (65KU45MAAS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rodrigo Esquivel (65KU45MAAS)";
 				DEVELOPMENT_TEAM = 53337WJ5R4;
 				ENABLE_BITCODE = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -652,8 +652,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rodev.Drillco;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f9dbe6ca-79c5-4ae5-b421-4015f0cf0bfd";
-				PROVISIONING_PROFILE_SPECIFIER = Distribution_Drillco_v1.0.0;
+				PROVISIONING_PROFILE = "5e1a584f-08f4-4935-8cf3-5a8042c8d792";
+				PROVISIONING_PROFILE_SPECIFIER = DRILLCO_DEVELOPMENT;
 				STRIP_INSTALLED_PRODUCT = YES;
 			};
 			name = Release;
