@@ -71,9 +71,19 @@ typedef void(^myCompletion) (BOOL);
     [self dbCallRequisition:^(BOOL finished){
         if(finished){
             NSLog(@"success");
-            [self.spinner stopAnimating];
-            [self.spinner hidesWhenStopped];
-            [self reloadData];
+            [self dbCallRequisitionType:^(BOOL finished){
+                if(finished){
+                    NSLog(@"success");
+                    [self.spinner stopAnimating];
+                    [self.spinner hidesWhenStopped];
+                    [self reloadData];
+                }else{
+                    NSLog(@"finished");
+                    [self.spinner stopAnimating];
+                    [self.spinner hidesWhenStopped];
+                    [self requisitionAlert:@"Un error ha ocurrido, favor tire hacía abajo para refrescar."];
+                }
+            }];
         }else{
             NSLog(@"finished");
             [self.spinner stopAnimating];
@@ -149,6 +159,22 @@ typedef void(^myCompletion) (BOOL);
     }];
 }
 
+- (void) dbCallRequisitionType:(myCompletion) dbBlock{
+    [self connect];
+    NSString * sql = [NSString stringWithFormat:@"SELECT (CASE GROUP_ID WHEN 'APRO1' THEN 'A1' WHEN 'APRO2' THEN 'A2' END) as TYPE FROM GROUP_USER WHERE USER_ID = '%@'", self.username];
+    [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
+        if (results) {
+            NSDictionary *type = [results[0] objectAtIndex:0];
+            self.requisition_type = type[@"TYPE"];
+            [[SQLClient sharedInstance] disconnect];
+            if(self.requisition_type){
+                dbBlock(YES);
+            }
+            
+        }
+    }];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -214,6 +240,8 @@ typedef void(^myCompletion) (BOOL);
     self.requisitionDetail_vc.requisitionDetail = self.requisition[0];
     self.requisitionDetail_vc.provider_name = self.info[@"NAME"];
     self.requisitionDetail_vc.requisition_id = self.info[@"ID"];
+    self.requisitionDetail_vc.requisition_type = self.requisition_type;
+    self.requisitionDetail_vc.username = self.username;
     [[self navigationController] pushViewController:self.requisitionDetail_vc animated:YES];
 }
 

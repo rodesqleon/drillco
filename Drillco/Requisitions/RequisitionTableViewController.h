@@ -17,4 +17,5 @@
 @property (strong, nonatomic) NSArray * requisition;
 @property (nonatomic) NSDictionary * info;
 @property (nonatomic) RequisitionDetailViewController * requisitionDetail_vc;
+@property (nonatomic) NSString *requisition_type;
 @end

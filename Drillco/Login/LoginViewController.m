@@ -64,6 +64,22 @@ typedef void(^myCompletion) (BOOL);
     }];
 }
 
+- (void) dbCallRequisitionType:(myCompletion) dbBlock{
+    [self connect];
+    NSString * sql = [NSString stringWithFormat:@"SELECT (CASE GROUP_ID WHEN 'APRO1' THEN 'A1' WHEN 'APRO2' THEN 'A2' END) as TYPE FROM GROUP_USER WHERE USER_ID = '%@'", self.username_txt.text];
+    [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
+        if (results) {
+            NSDictionary *type = [results[0] objectAtIndex:0];
+            self.requisition_type = type[@"TYPE"];
+            [[SQLClient sharedInstance] disconnect];
+            if(self.requisition_type){
+                dbBlock(YES);
+            }
+            
+        }
+    }];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -88,7 +104,6 @@ typedef void(^myCompletion) (BOOL);
             [self.spinner stopAnimating];
             [self.spinner hidesWhenStopped];
             [self loginAlertWithString:@"Error inicio de sesión, favor intente nuevamente."];
-            
         }
     }];
 }
@@ -100,10 +115,22 @@ typedef void(^myCompletion) (BOOL);
             [self dbCallRequisition:^(BOOL finished){
                 if(finished){
                     NSLog(@"success");
-                    [self.spinner stopAnimating];
-                    [self.spinner hidesWhenStopped];
                     self.view.userInteractionEnabled = YES;
-                    [self didRequisitionList:self.results];
+                    [self dbCallRequisitionType:^(BOOL finished){
+                        if(finished){
+                            NSLog(@"success");
+                            [self.spinner stopAnimating];
+                            [self.spinner hidesWhenStopped];
+                            self.view.userInteractionEnabled = YES;
+                            
+                            [self didRequisitionList:self.results];
+                            
+                        }else{
+                            NSLog(@"finished");
+                            [self.spinner stopAnimating];
+                            [self.spinner hidesWhenStopped];
+                        }
+                    }];
                     
                 }else{
                     NSLog(@"finished");
@@ -146,6 +173,7 @@ typedef void(^myCompletion) (BOOL);
     self.requisitionList_vc = [[RequisitionTableViewController alloc] initWithNibName:@"RequisitionListView_style_1" bundle:nil];
     self.requisitionList_vc.username = self.username_txt.text;
     self.requisitionList_vc.requisition = results[0];
+    self.requisitionList_vc.requisition_type = self.requisition_type;
     self.username_txt.text = @"";
     self.password_txt.text = @"";
     [[self navigationController] pushViewController:self.requisitionList_vc animated:YES];

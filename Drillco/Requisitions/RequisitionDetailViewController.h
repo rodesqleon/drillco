@@ -14,4 +14,6 @@
 @property (nonatomic) NSArray *results;
 @property (nonatomic) NSString *provider_name;
 @property (nonatomic) NSString *requisition_id;
+@property (nonatomic) NSString *requisition_type;
+@property (nonatomic) NSString *username;
 @end
