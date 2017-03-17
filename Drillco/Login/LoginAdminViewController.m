@@ -31,26 +31,14 @@ typedef void(^myCompletion) (BOOL);
 
 
 - (void) dbCallLogin:(myCompletion) dbBlock{
-    [self connect];
-    NSString * sql = [@"select u.USER_ID, d.PASSWORD from DRILL_MAE_USUARIO_MOVIL d, GROUP_USER u where u.USER_ID='" stringByAppendingString:[NSString stringWithFormat:@"%@' AND d.PASSWORD='%@'", self.username_txt.text, self.password_txt.text]];
-    [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
-        if (results) {
-            self.results = results;
-            [[SQLClient sharedInstance] disconnect];
-            if(self.results){
-                dbBlock(YES);
-            }
-            
-        }else{
-            dbBlock(NO);
-        }
-    }];
+
+   dbBlock(YES);
     
 }
 
 - (void) dbCallRequisition:(myCompletion) dbBlock{
     [self connect];
-    NSString * sql = [NSString stringWithFormat:@"select P.ID, v.NAME, P.VENDOR_ID, pr.CURRENCY_ID, P.DESIRED_RECV_DATE, PR.AMOUNT from PURC_REQUISITION p, VENDOR v, PURC_REQ_CURR pr where pr.currency_id = P.CURRENCY_ID and p.ASSIGNED_TO = '%@' and p.STATUS = 'I' and p.VENDOR_ID = v.ID and p.ID = pr.PURC_REQ_ID order by P.REQUISITION_DATE", self.username_txt.text];
+    NSString * sql = @"select P.ID, v.NAME, P.VENDOR_ID, pr.CURRENCY_ID, P.DESIRED_RECV_DATE, PR.AMOUNT,P.ASSIGNED_TO from PURC_REQUISITION p, VENDOR v, PURC_REQ_CURR pr where pr.currency_id = P.CURRENCY_ID and p.STATUS = 'I' and p.VENDOR_ID = v.ID and p.ID = pr.PURC_REQ_ID order by P.REQUISITION_DATE";
     [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
         if (results) {
             self.results = results;
@@ -78,25 +66,19 @@ typedef void(^myCompletion) (BOOL);
     [self.view addSubview:self.spinner];
     [self.spinner startAnimating];
     self.view.userInteractionEnabled = NO;
-    [self dbCallLogin:^(BOOL finished){
-        if(finished){
-            NSLog(@"success");
-            [self didLogin:self.results];
-        }else{
-            NSLog(@"finished");
-            [self.spinner stopAnimating];
-            [self.spinner hidesWhenStopped];
-            [self loginAlertWithString:@"Error inicio de sesión, favor intente nuevamente."];
-            
-        }
-    }];
+    if([self.username_txt.text isEqualToString:@"Sysadm"] && [self.password_txt.text isEqualToString:@"Sy123"]){
+        [self didLogin:self.results];
+    }else{
+        [self.spinner stopAnimating];
+        [self.spinner hidesWhenStopped];
+        [self loginAlertWithString:@"Usuario y/o contraseña incorrectas."];
+    }
+    
 }
 
 - (void)didLogin:(NSArray *)results{
     
-    if([results count] > 0){
-        if([results[0] count] > 0){
-            [self dbCallRequisition:^(BOOL finished){
+    [self dbCallRequisition:^(BOOL finished){
                 if(finished){
                     NSLog(@"success");
                     [self.spinner stopAnimating];
@@ -108,20 +90,9 @@ typedef void(^myCompletion) (BOOL);
                     NSLog(@"finished");
                     [self.spinner stopAnimating];
                     [self.spinner hidesWhenStopped];
+                    [self loginAlertWithString:@"Error inicio de sesiónm favor intente nuevamente."];
                 }
-            }];
-        }else{
-            [self.spinner stopAnimating];
-            [self.spinner hidesWhenStopped ];
-            self.view.userInteractionEnabled = YES;
-            [self loginAlertWithString:@"Usuario y/o contraseña incorrectas."];
-        }
-    }else{
-        [self.spinner stopAnimating];
-        [self.spinner hidesWhenStopped ];
-        self.view.userInteractionEnabled = YES;
-        [self loginAlertWithString:@"Usuario y/o contraseña incorrectas."];
-    }
+    }];
 }
 
 - (void) loginAlertWithString:(NSString *) text{
@@ -142,7 +113,7 @@ typedef void(^myCompletion) (BOOL);
 }
 
 - (void)didRequisitionList:(NSArray *)results{
-    self.requisitionList_vc = [[RequisitionTableViewController alloc] initWithNibName:@"RequisitionListView_style_1" bundle:nil];
+    self.requisitionList_vc = [[RequisitionAdminTableViewController alloc] initWithNibName:@"RequisitionAdminListView_style_1" bundle:nil];
     self.requisitionList_vc.username = self.username_txt.text;
     self.requisitionList_vc.requisition = results[0];
     self.username_txt.text = @"";

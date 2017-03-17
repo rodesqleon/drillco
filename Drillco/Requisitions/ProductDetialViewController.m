@@ -9,9 +9,13 @@
 #import "ProductDetialViewController.h"
 #import "ProductCell.h"
 
+typedef void(^myCompletion) (BOOL);
+
+
 @interface ProductDetialViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *productTabelView;
 @property (weak, nonatomic) IBOutlet UILabel *productName_lbl;
+@property (nonatomic) UIActivityIndicatorView *spinner;
 
 @end
 
@@ -62,5 +66,4 @@
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.productTabelView deselectRowAtIndexPath:indexPath animated:YES];
 }
-
 @end

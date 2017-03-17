@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RequisitionAdminTableViewController">
+            <connections>
+                <outlet property="requisitionTableView" destination="wAe-AL-GKw" id="ae7-me-IWm"/>
+                <outlet property="username_lbl" destination="jgm-ml-y9e" id="mZ3-vx-VjN"/>
+                <outlet property="view" destination="iN0-l3-epB" id="MkJ-jm-JJJ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wAe-AL-GKw">
+                    <rect key="frame" x="0.0" y="40" width="375" height="627"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="8mD-aE-wdT"/>
+                        <outlet property="delegate" destination="-1" id="meH-yK-t7J"/>
+                    </connections>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MBt-u4-qAa">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USERNAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jgm-ml-y9e">
+                            <rect key="frame" x="140.5" y="10" width="94" height="20"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="jgm-ml-y9e" firstAttribute="centerY" secondItem="MBt-u4-qAa" secondAttribute="centerY" id="ErL-r3-cnD"/>
+                        <constraint firstAttribute="height" constant="40" id="n7r-a7-ciY"/>
+                        <constraint firstItem="jgm-ml-y9e" firstAttribute="centerX" secondItem="MBt-u4-qAa" secondAttribute="centerX" id="oUZ-cy-YUG"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="MBt-u4-qAa" secondAttribute="trailing" id="2EB-Rm-E34"/>
+                <constraint firstItem="wAe-AL-GKw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="5iA-GJ-6mg"/>
+                <constraint firstAttribute="bottom" secondItem="wAe-AL-GKw" secondAttribute="bottom" id="ZCv-fa-LHv"/>
+                <constraint firstItem="wAe-AL-GKw" firstAttribute="top" secondItem="MBt-u4-qAa" secondAttribute="bottom" id="dUO-U4-dog"/>
+                <constraint firstAttribute="trailing" secondItem="wAe-AL-GKw" secondAttribute="trailing" id="gc6-Ag-wyS"/>
+                <constraint firstItem="MBt-u4-qAa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sbo-ob-YRN"/>
+                <constraint firstItem="MBt-u4-qAa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="sxX-2A-Uo8"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

@@ -28,6 +28,12 @@
 		A46DC3B91E74ED0900A62AE4 /* RequisitionDeclineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A46DC3B71E74ED0900A62AE4 /* RequisitionDeclineViewController.m */; };
 		A46DC3BA1E74ED0900A62AE4 /* RequisitionDeclineView_style_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = A46DC3B81E74ED0900A62AE4 /* RequisitionDeclineView_style_1.xib */; };
 		A4B7CDDC1E71442700EC849D /* libsybdb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B7CDDB1E71442700EC849D /* libsybdb.a */; };
+		A4D785031E7B5ABA0032873D /* ProductMoreDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4D785021E7B5ABA0032873D /* ProductMoreDetailViewController.m */; };
+		A4D785051E7B72000032873D /* ProductMoreDetailView_style_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4D785041E7B72000032873D /* ProductMoreDetailView_style_1.xib */; };
+		A4D785081E7B729C0032873D /* ProductMoreDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4D785071E7B729C0032873D /* ProductMoreDetailCell.m */; };
+		A4D7850A1E7B72AF0032873D /* ProductMoreDetailCell_style_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4D785091E7B72AF0032873D /* ProductMoreDetailCell_style_1.xib */; };
+		A4D7850D1E7B83690032873D /* RequisitionAdminTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4D7850C1E7B83690032873D /* RequisitionAdminTableViewController.m */; };
+		A4D7850F1E7B846F0032873D /* RequisitionAdminListView_style_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4D7850E1E7B846F0032873D /* RequisitionAdminListView_style_1.xib */; };
 		A4E4819E1E6E27EF00D21E34 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E4819D1E6E27EF00D21E34 /* main.m */; };
 		A4E481A11E6E27EF00D21E34 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E481A01E6E27EF00D21E34 /* AppDelegate.m */; };
 		A4E481A91E6E27EF00D21E34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4E481A81E6E27EF00D21E34 /* Assets.xcassets */; };
@@ -91,6 +97,15 @@
 		A46DC3B71E74ED0900A62AE4 /* RequisitionDeclineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequisitionDeclineViewController.m; sourceTree = "<group>"; };
 		A46DC3B81E74ED0900A62AE4 /* RequisitionDeclineView_style_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequisitionDeclineView_style_1.xib; sourceTree = "<group>"; };
 		A4B7CDDB1E71442700EC849D /* libsybdb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsybdb.a; path = Drillco/Libs/SQLClient/libsybdb.a; sourceTree = "<group>"; };
+		A4D785011E7B5ABA0032873D /* ProductMoreDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductMoreDetailViewController.h; sourceTree = "<group>"; };
+		A4D785021E7B5ABA0032873D /* ProductMoreDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductMoreDetailViewController.m; sourceTree = "<group>"; };
+		A4D785041E7B72000032873D /* ProductMoreDetailView_style_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductMoreDetailView_style_1.xib; sourceTree = "<group>"; };
+		A4D785061E7B729C0032873D /* ProductMoreDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductMoreDetailCell.h; sourceTree = "<group>"; };
+		A4D785071E7B729C0032873D /* ProductMoreDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductMoreDetailCell.m; sourceTree = "<group>"; };
+		A4D785091E7B72AF0032873D /* ProductMoreDetailCell_style_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductMoreDetailCell_style_1.xib; sourceTree = "<group>"; };
+		A4D7850B1E7B83690032873D /* RequisitionAdminTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequisitionAdminTableViewController.h; sourceTree = "<group>"; };
+		A4D7850C1E7B83690032873D /* RequisitionAdminTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequisitionAdminTableViewController.m; sourceTree = "<group>"; };
+		A4D7850E1E7B846F0032873D /* RequisitionAdminListView_style_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequisitionAdminListView_style_1.xib; sourceTree = "<group>"; };
 		A4E481991E6E27EF00D21E34 /* Drillco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drillco.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4E4819D1E6E27EF00D21E34 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A4E4819F1E6E27EF00D21E34 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -284,6 +299,7 @@
 		A4F8BDE61E6F7E82009A80ED /* Requisitions */ = {
 			isa = PBXGroup;
 			children = (
+				A4D7850E1E7B846F0032873D /* RequisitionAdminListView_style_1.xib */,
 				A4F8BDEC1E6F80B3009A80ED /* RequisitionCell.h */,
 				A4F8BDED1E6F80B3009A80ED /* RequisitionCell.m */,
 				A4F8BDEE1E6F80B3009A80ED /* RequisitionCellView_style_1.xib */,
@@ -314,6 +330,14 @@
 				A46DC3B61E74ED0900A62AE4 /* RequisitionDeclineViewController.h */,
 				A46DC3B71E74ED0900A62AE4 /* RequisitionDeclineViewController.m */,
 				A46DC3B81E74ED0900A62AE4 /* RequisitionDeclineView_style_1.xib */,
+				A4D785011E7B5ABA0032873D /* ProductMoreDetailViewController.h */,
+				A4D785021E7B5ABA0032873D /* ProductMoreDetailViewController.m */,
+				A4D785041E7B72000032873D /* ProductMoreDetailView_style_1.xib */,
+				A4D785061E7B729C0032873D /* ProductMoreDetailCell.h */,
+				A4D785071E7B729C0032873D /* ProductMoreDetailCell.m */,
+				A4D785091E7B72AF0032873D /* ProductMoreDetailCell_style_1.xib */,
+				A4D7850B1E7B83690032873D /* RequisitionAdminTableViewController.h */,
+				A4D7850C1E7B83690032873D /* RequisitionAdminTableViewController.m */,
 			);
 			path = Requisitions;
 			sourceTree = "<group>";
@@ -428,10 +452,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4325C871E6E4F87005AF214 /* LoginAdminView_style_1.xib in Resources */,
+				A4D7850F1E7B846F0032873D /* RequisitionAdminListView_style_1.xib in Resources */,
 				A4F8BDF01E6F80B3009A80ED /* RequisitionCellView_style_1.xib in Resources */,
 				A4E481F41E6E2A8A00D21E34 /* LoginView_style_1.xib in Resources */,
 				7B5B9F1D1E71DFF300D1B7B7 /* SupplierViewCell_style_1.xib in Resources */,
 				A4E481A91E6E27EF00D21E34 /* Assets.xcassets in Resources */,
+				A4D7850A1E7B72AF0032873D /* ProductMoreDetailCell_style_1.xib in Resources */,
 				7B0F49B51E70901700C6C999 /* RequisitionDetailView_style_1.xib in Resources */,
 				7B5B9F271E71EAB800D1B7B7 /* ProductCellView_style_1.xib in Resources */,
 				7B0F49BA1E70977600C6C999 /* RequisitionDetailCellView_style_1.xib in Resources */,
@@ -439,6 +465,7 @@
 				A46DC3B31E74859900A62AE4 /* RequisitionApproveView_style_1.xib in Resources */,
 				A4F8BDE81E6F7E92009A80ED /* RequisitionListView_style_1.xib in Resources */,
 				A46DC3BA1E74ED0900A62AE4 /* RequisitionDeclineView_style_1.xib in Resources */,
+				A4D785051E7B72000032873D /* ProductMoreDetailView_style_1.xib in Resources */,
 				7B5B9F221E71E94800D1B7B7 /* ProductDetialView_style_1.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,9 +494,12 @@
 				A4F8BDEF1E6F80B3009A80ED /* RequisitionCell.m in Sources */,
 				A46DC3B21E74859900A62AE4 /* RequisitionApproveViewController.m in Sources */,
 				A4325C861E6E4F83005AF214 /* LoginAdminViewController.m in Sources */,
+				A4D785081E7B729C0032873D /* ProductMoreDetailCell.m in Sources */,
+				A4D7850D1E7B83690032873D /* RequisitionAdminTableViewController.m in Sources */,
 				A4E481F21E6E29B400D21E34 /* LoginViewController.m in Sources */,
 				A4E481A11E6E27EF00D21E34 /* AppDelegate.m in Sources */,
 				7B3323B51E7036BB00BB47BB /* RequisitionTableViewController.m in Sources */,
+				A4D785031E7B5ABA0032873D /* ProductMoreDetailViewController.m in Sources */,
 				7B5B9F261E71EAB800D1B7B7 /* ProductCell.m in Sources */,
 				A4E4819E1E6E27EF00D21E34 /* main.m in Sources */,
 				7B0F49B41E70901700C6C999 /* RequisitionDetailViewController.m in Sources */,
@@ -610,8 +640,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Rodrigo Esquivel (65KU45MAAS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rodrigo Esquivel (65KU45MAAS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: rorrork@gmail.com (65KU45MAAS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: rorrork@gmail.com (65KU45MAAS)";
 				DEVELOPMENT_TEAM = 53337WJ5R4;
 				ENABLE_BITCODE = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -637,8 +667,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Rodrigo Esquivel (65KU45MAAS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rodrigo Esquivel (65KU45MAAS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: rorrork@gmail.com (65KU45MAAS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: rorrork@gmail.com (65KU45MAAS)";
 				DEVELOPMENT_TEAM = 53337WJ5R4;
 				ENABLE_BITCODE = NO;
 				GCC_NO_COMMON_BLOCKS = YES;

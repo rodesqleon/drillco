@@ -19,6 +19,7 @@ typedef void(^myCompletion) (BOOL);
 @property (weak, nonatomic) IBOutlet UILabel *providerName_lbl;
 @property (nonatomic) NSString * productName;
 @property (nonatomic) UIActivityIndicatorView *spinner;
+@property (nonatomic) BOOL connection;
 @end
 
 @implementation RequisitionDetailViewController
@@ -36,6 +37,8 @@ typedef void(^myCompletion) (BOOL);
     self.navigationController.navigationBar.translucent = NO;
     self.title = [NSString stringWithFormat:@"Detalle Nº%@",self.requisition_id];
     self.providerName_lbl.text = self.provider_name;
+    [self connect];
+
 }
 
 - (void) reloadData{
@@ -68,7 +71,7 @@ typedef void(^myCompletion) (BOOL);
 
 - (void) dbCallProduct:(myCompletion) dbBlock{
     [self connect];
-    NSString * sql = [NSString stringWithFormat:@"select top 5 P.ID as [N° REQUISICION], v.NAME as [NOMBRE PROVEEDOR], P.VENDOR_ID as [RUT], P.CURRENCY_ID as [MONEDA], P.DESIRED_RECV_DATE as [FEC DESEADA], pl.UNIT_PRICE as [PRECIO UNIT] from PURC_REQUISITION p, VENDOR v, PURC_REQ_LINE pl, PART pa where p.STATUS = 'C' and p.VENDOR_ID = v.ID and p.ID = pl.PURC_REQ_ID and pa.ID = pl.PART_ID and pa.DESCRIPTION = '%@' order by p.desired_recv_date desc,p.id,pl.LINE_NO", self.productName];
+    NSString * sql = [NSString stringWithFormat:@"select top 5 P.ID as [NUM REQUISICION], v.NAME as [NOMBRE PROVEEDOR], P.VENDOR_ID as [RUT], P.CURRENCY_ID as [MONEDA], P.DESIRED_RECV_DATE as [FEC DESEADA], pl.UNIT_PRICE as [PRECIO UNIT] from PURC_REQUISITION p, VENDOR v, PURC_REQ_LINE pl, PART pa where p.STATUS = 'C' and p.VENDOR_ID = v.ID and p.ID = pl.PURC_REQ_ID and pa.ID = pl.PART_ID and pa.DESCRIPTION = '%@' order by p.desired_recv_date desc,p.id,pl.LINE_NO", self.productName];
     [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
         if (results) {
             self.results = results[0];
@@ -93,25 +96,28 @@ typedef void(^myCompletion) (BOOL);
 }
 
 - (void) dbApproveRequisition:(myCompletion) dbBlock{
-    [self connect];
+    if(self.connection){
     //NSString *sql = [NSString stringWithFormat:@"UPDATE PURC_REQUISITION set STATUS = 'V', ASSIGNED_TO = 'FPADILLA', APP1_DATE = getdate(), APP2_DATE = getdate(), USER_10 = 'APP_MOVIL' where ID = '%@'; update purc_req_line set line_status = 'V' where purc_req_id = '%@'; UPDATE TASK SET USER_ID = 'FPADILLA', STATUS = 'P' WHERE EC_ID = '%@' AND SEQ_NO = 1 AND SUB_TYPE = 'AT';", self.requisition_id, self.requisition_id, self.requisition_id];
-    NSString *sql = [NSString stringWithFormat:@"UPDATE PURC_REQUISITION set STATUS = 'V', ASSIGNED_TO = ‘FPADILLA’, APP1_DATE = getdate(), APP2_DATE = getdate(), USER_9 = '%@',USER_10 = 'APP_MOVIL' where ID = '%@' update purc_req_line set line_status = 'V' where purc_req_id = '%@'  select top 1 task_no,seq_no from TASK where EC_ID = '%@' order by seq_no desc UPDATE TASK SET USER_ID = 'FPADILLA', STATUS = 'P' WHERE EC_ID = '%@' AND SEQ_NO = 1 AND SUB_TYPE = 'AT'  UPDATE TASK SET COMPLETED_DATE = getdate(), STATUS_EFF_DATE = getdate(), STATUS = 'C' WHERE EC_ID = '%@' AND SEQ_NO > 1 insert TASK (TYPE, TASK_NO, SEQ_NO, USER_ID, SUB_TYPE, EC_ID, STATUS, COMPLETED_DATE) select TYPE, TASK_NO, SEQ_NO + 1, '%@', '%@', EC_ID, 'C', GETDATE() from task where ec_id = '%@' and SEQ_NO = 1 and SUB_TYPE = 'AT'", self.username, self.requisition_id, self.requisition_id, self.requisition_id, self.requisition_id, self.requisition_id, self.username, self.requisition_type, self.requisition_id];
+    NSString *sql = [NSString stringWithFormat:@"UPDATE PURC_REQUISITION set STATUS = 'V', ASSIGNED_TO = 'FPADILLA', APP1_DATE = getdate(), APP2_DATE = getdate(), USER_9 = '%@', USER_10 = 'APP_MOVIL' where ID = '%@'; update purc_req_line set line_status = 'V' where purc_req_id = '%@'; select top 1 task_no,seq_no from TASK where EC_ID = '%@' order by seq_no desc UPDATE TASK SET USER_ID = 'FPADILLA', STATUS = 'P' WHERE EC_ID = '%@' AND SEQ_NO = 1 AND SUB_TYPE = 'AT' UPDATE TASK SET COMPLETED_DATE = getdate(), STATUS_EFF_DATE = getdate(), STATUS = 'C' WHERE EC_ID = '%@' AND SEQ_NO > 1 insert TASK (TYPE, TASK_NO, SEQ_NO, USER_ID, SUB_TYPE, EC_ID, STATUS, COMPLETED_DATE) select TYPE, TASK_NO, SEQ_NO + 1, '%@', '%@', EC_ID, 'C', GETDATE() from task where ec_id = '%@' and SEQ_NO = 1 and SUB_TYPE = 'AT';", self.username, self.requisition_id, self.requisition_id, self.requisition_id, self.requisition_id, self.requisition_id, self.username, self.requisition_type, self.requisition_id];
     [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
-        if (results) {
             dbBlock(YES);
-        }
     }];
+    }else{
+        dbBlock(NO);
+    }
     
 }
 
 - (void) dbDeclineRequisition:(myCompletion) dbBlock{
-    [self connect];
-    NSString *sql = [NSString stringWithFormat:@"UPDATE PURC_REQUISITION set STATUS = 'X', ASSIGNED_TO = 'FPADILLA', APP1_DATE = getdate(), APP2_DATE = getdate(), USER_10 = 'APP_MOVIL' where ID = '%@'; update purc_req_line set line_status = 'V' where purc_req_id = '%@'; UPDATE TASK SET USER_ID = 'FPADILLA', STATUS = 'P' WHERE EC_ID = '%@' AND SEQ_NO = 1 AND SUB_TYPE = 'AT';", self.requisition_id, self.requisition_id, self.requisition_id];
+    if(self.connection){
+    NSString *sql = [NSString stringWithFormat:@"UPDATE PURC_REQUISITION set STATUS = 'X', ASSIGNED_TO = 'FPADILLA', APP1_DATE = getdate(), APP2_DATE = getdate(), USER_9 = '%@', USER_10 = 'APP_MOVIL' where ID = '%@'; update purc_req_line set line_status = 'X' where purc_req_id = '%@'; select top 1 task_no,seq_no from TASK where EC_ID = '%@' order by seq_no desc UPDATE TASK SET USER_ID = 'FPADILLA', STATUS = 'P' WHERE EC_ID = '%@' AND SEQ_NO = 1 AND SUB_TYPE = 'AT' UPDATE TASK SET COMPLETED_DATE = getdate(), STATUS_EFF_DATE = getdate(), STATUS = 'C' WHERE EC_ID = '%@' AND SEQ_NO > 1 insert TASK (TYPE, TASK_NO, SEQ_NO, USER_ID, SUB_TYPE, EC_ID, STATUS, COMPLETED_DATE) select TYPE, TASK_NO, SEQ_NO + 1, '%@', '%@', EC_ID, 'C', GETDATE() from task where ec_id = '%@' and SEQ_NO = 1 and SUB_TYPE = 'AT';", self.username, self.requisition_id, self.requisition_id, self.requisition_id, self.requisition_id, self.requisition_id, self.username, self.requisition_type, self.requisition_id];
     [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
-        if (results) {
-            dbBlock(YES);
-        }
+         dbBlock(YES);
     }];
+    }else{
+        dbBlock(NO);
+    }
+
 }
 
 - (IBAction)goToSupplier:(id)sender {
@@ -307,7 +313,9 @@ typedef void(^myCompletion) (BOOL);
     [client connect:@"200.72.13.150" username:@"sa" password:@"13871388" database:@"Drilprue" completion:^(BOOL success) {
         self.view.userInteractionEnabled = YES;
         if (success) {
-            //			[self execute];
+            self.connection = YES;
+        }else{
+            self.connection = NO;
         }
     }];
 }

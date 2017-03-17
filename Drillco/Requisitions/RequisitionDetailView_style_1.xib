@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,10 +18,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xGP-a3-n1E">
+                    <rect key="frame" x="0.0" y="80" width="320" height="400"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="VhK-a7-CYE"/>
@@ -26,19 +30,26 @@
                     </connections>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6g6-z5-MLJ">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROVIDER_NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DTV-pm-KOd">
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROVIDER_NAME" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DTV-pm-KOd">
+                            <rect key="frame" x="86" y="14" width="230" height="14.5"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
                             <color key="textColor" red="0.0" green="0.40000000000000002" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s4e-Ga-mx4">
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                            <rect key="frame" x="86" y="8.5" width="230" height="26"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="230" id="L4Z-dz-fP1"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                             <connections>
                                 <action selector="goToSupplier:" destination="-1" eventType="touchUpInside" id="Kw8-DM-8Wc"/>
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nombre:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gx4-ES-CZi">
+                            <rect key="frame" x="8" y="8" width="70" height="20.5"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -50,16 +61,18 @@
                         <constraint firstItem="DTV-pm-KOd" firstAttribute="leading" secondItem="Gx4-ES-CZi" secondAttribute="trailing" constant="8" id="30i-3i-XmI"/>
                         <constraint firstItem="s4e-Ga-mx4" firstAttribute="centerX" secondItem="DTV-pm-KOd" secondAttribute="centerX" id="4PF-Sv-KRB"/>
                         <constraint firstItem="s4e-Ga-mx4" firstAttribute="trailing" secondItem="DTV-pm-KOd" secondAttribute="trailing" id="7CJ-9D-MYH"/>
-                        <constraint firstItem="DTV-pm-KOd" firstAttribute="bottom" secondItem="Gx4-ES-CZi" secondAttribute="bottom" id="DmE-11-nrE"/>
                         <constraint firstItem="Gx4-ES-CZi" firstAttribute="top" secondItem="6g6-z5-MLJ" secondAttribute="top" constant="8" id="HMn-We-vIr"/>
+                        <constraint firstItem="DTV-pm-KOd" firstAttribute="top" secondItem="6g6-z5-MLJ" secondAttribute="top" constant="14" id="dvp-II-B2B"/>
                         <constraint firstAttribute="height" constant="40" id="vvl-nS-aIf"/>
                         <constraint firstItem="Gx4-ES-CZi" firstAttribute="leading" secondItem="6g6-z5-MLJ" secondAttribute="leading" constant="8" id="xwA-kR-Zzd"/>
                         <constraint firstItem="s4e-Ga-mx4" firstAttribute="centerY" secondItem="DTV-pm-KOd" secondAttribute="centerY" id="yDS-aA-JjG"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i4R-Lk-Eru">
+                    <rect key="frame" x="0.0" y="40" width="320" height="40"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Productos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NTI-cv-A6K">
+                            <rect key="frame" x="8" y="11" width="69.5" height="17.5"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -72,8 +85,11 @@
                         <constraint firstItem="NTI-cv-A6K" firstAttribute="leading" secondItem="i4R-Lk-Eru" secondAttribute="leading" constant="8" id="ja0-EW-Dj4"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KYW-Qx-bB8"/>
+                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KYW-Qx-bB8">
+                    <rect key="frame" x="145" y="438" width="30" height="30"/>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L62-T0-H0c">
+                    <rect key="frame" x="80" y="433" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="5gw-nP-bIv"/>
                         <constraint firstAttribute="height" constant="40" id="GHW-74-eZF"/>
@@ -84,6 +100,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7mF-c3-NgY">
+                    <rect key="frame" x="200" y="433" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="FvY-hT-cgQ"/>
                         <constraint firstAttribute="width" constant="40" id="Fzh-jq-Nnn"/>

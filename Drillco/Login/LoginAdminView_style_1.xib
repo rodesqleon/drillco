@@ -22,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="USUARIO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="puq-Yc-Ios">
-                    <rect key="frame" x="24" y="165" width="272" height="50"/>
+                    <rect key="frame" x="24" y="125" width="272" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="Xgg-9D-8wj"/>
                     </constraints>
@@ -34,14 +34,14 @@
                     </connections>
                 </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vzj-qM-EY3">
-                    <rect key="frame" x="24" y="208" width="272" height="1"/>
+                    <rect key="frame" x="24" y="168" width="272" height="1"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="hgj-bh-C4j"/>
                     </constraints>
                 </view>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="CONTRASEÑA" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oOt-tV-kyj">
-                    <rect key="frame" x="24" y="217" width="272" height="50"/>
+                    <rect key="frame" x="24" y="177" width="272" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="TiD-b8-cYX"/>
                     </constraints>
@@ -53,7 +53,7 @@
                     </connections>
                 </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EyI-bk-rRB">
-                    <rect key="frame" x="24" y="260" width="272" height="1"/>
+                    <rect key="frame" x="24" y="220" width="272" height="1"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="pVV-Lz-Q3v"/>
@@ -75,7 +75,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Administrador" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hXZ-Ef-IXN">
-                    <rect key="frame" x="82" y="86" width="157" height="29"/>
+                    <rect key="frame" x="82" y="46" width="157" height="29"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="24"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -87,7 +87,7 @@
                 <constraint firstItem="vzj-qM-EY3" firstAttribute="centerX" secondItem="puq-Yc-Ios" secondAttribute="centerX" id="224-fV-gUR"/>
                 <constraint firstItem="EyI-bk-rRB" firstAttribute="centerX" secondItem="oOt-tV-kyj" secondAttribute="centerX" id="322-u4-egh"/>
                 <constraint firstItem="oOt-tV-kyj" firstAttribute="centerX" secondItem="puq-Yc-Ios" secondAttribute="centerX" id="3f7-De-X58"/>
-                <constraint firstItem="puq-Yc-Ios" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-50" id="8uW-dQ-8mO"/>
+                <constraint firstItem="puq-Yc-Ios" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-90" id="8uW-dQ-8mO"/>
                 <constraint firstItem="vzj-qM-EY3" firstAttribute="top" secondItem="puq-Yc-Ios" secondAttribute="bottom" constant="-7" id="9f5-0J-EBb"/>
                 <constraint firstItem="puq-Yc-Ios" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="24" id="COO-rp-5jT"/>
                 <constraint firstItem="vzj-qM-EY3" firstAttribute="leading" secondItem="puq-Yc-Ios" secondAttribute="leading" id="GWI-cL-aYA"/>

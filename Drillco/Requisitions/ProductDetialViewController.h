@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SQLClient.h"
 
 @interface ProductDetialViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic) NSString * productName;
 @property (nonatomic) NSArray * products;
+@property (nonatomic) NSArray *results;
 @end
