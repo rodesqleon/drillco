@@ -9,6 +9,7 @@
 #import "SupplierViewController.h"
 #import "SupplierCell.h"
 #import "ProductMoreDetailViewController.h"
+#import "Reachability.h"
 
 typedef void(^myCompletion) (BOOL);
 
@@ -125,19 +126,29 @@ typedef void(^myCompletion) (BOOL);
     self.spinner.center=self.view.center;
     [self.view addSubview:self.spinner];
     [self.spinner startAnimating];
-    [self dbCallProductDetailId:product[@"ID"] Block:^(BOOL finished){
-        if(finished){
-            NSLog(@"success");
-            [self.spinner stopAnimating];
-            [self.spinner hidesWhenStopped];
-            [self didProductDetail];
-        }else{
-            NSLog(@"finished");
-            [self.spinner stopAnimating];
-            [self.spinner hidesWhenStopped];
-            [self requisitionAlert:@"Un error ha ocurrido, intente nuevamente."];
-        }
-    }];
+    
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    
+    if (networkStatus == NotReachable) {
+        [self.spinner stopAnimating];
+        [self.spinner hidesWhenStopped];
+        [self requisitionAlert:@"Favor revise su conexión a internet."];
+    }else{
+        [self dbCallProductDetailId:product[@"ID"] Block:^(BOOL finished){
+            if(finished){
+                NSLog(@"success");
+                [self.spinner stopAnimating];
+                [self.spinner hidesWhenStopped];
+                [self didProductDetail];
+            }else{
+                NSLog(@"finished");
+                [self.spinner stopAnimating];
+                [self.spinner hidesWhenStopped];
+                [self requisitionAlert:@"Un error ha ocurrido, intente nuevamente."];
+            }
+        }];
+    }
     [self.supplierDetailTableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

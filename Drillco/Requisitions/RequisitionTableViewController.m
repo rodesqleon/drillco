@@ -8,6 +8,7 @@
 
 #import "RequisitionTableViewController.h"
 #import "RequisitionCell.h"
+#import "Reachability.h"
 
 typedef void(^myCompletion) (BOOL);
 
@@ -68,29 +69,38 @@ typedef void(^myCompletion) (BOOL);
 }
 
 - (void) goForRequisitions{
-    [self dbCallRequisition:^(BOOL finished){
-        if(finished){
-            NSLog(@"success");
-            [self dbCallRequisitionType:^(BOOL finished){
-                if(finished){
-                    NSLog(@"success");
-                    [self.spinner stopAnimating];
-                    [self.spinner hidesWhenStopped];
-                    [self reloadData];
-                }else{
-                    NSLog(@"finished");
-                    [self.spinner stopAnimating];
-                    [self.spinner hidesWhenStopped];
-                    [self requisitionAlert:@"Un error ha ocurrido, favor tire hacía abajo para refrescar."];
-                }
-            }];
-        }else{
-            NSLog(@"finished");
-            [self.spinner stopAnimating];
-            [self.spinner hidesWhenStopped];
-            [self requisitionAlert:@"Un error ha ocurrido, favor tire hacía abajo para refrescar."];
-        }
-    }];
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable) {
+        [self.spinner stopAnimating];
+        [self.spinner hidesWhenStopped];
+        [self requisitionAlert:@"Favor revise su conexión a internet."];
+    }else{
+        [self dbCallRequisition:^(BOOL finished){
+            if(finished){
+                NSLog(@"success");
+                [self dbCallRequisitionType:^(BOOL finished){
+                    if(finished){
+                        NSLog(@"success");
+                        [self.spinner stopAnimating];
+                        [self.spinner hidesWhenStopped];
+                        [self reloadData];
+                    }else{
+                        NSLog(@"finished");
+                        [self.spinner stopAnimating];
+                        [self.spinner hidesWhenStopped];
+                        [self requisitionAlert:@"Un error ha ocurrido, favor tire hacía abajo para refrescar."];
+                    }
+                }];
+            }else{
+                NSLog(@"finished");
+                [self.spinner stopAnimating];
+                [self.spinner hidesWhenStopped];
+                [self requisitionAlert:@"Un error ha ocurrido, favor tire hacía abajo para refrescar."];
+            }
+        }];
+    }
+    [self.refreshControl endRefreshing];
 }
 
 - (void) reloadData {

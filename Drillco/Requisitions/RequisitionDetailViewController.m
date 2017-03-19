@@ -11,6 +11,7 @@
 #import "ProductDetialViewController.h"
 #import "RequisitionApproveViewController.h"
 #import "RequisitionDeclineViewController.h"
+#import "Reachability.h"
 
 typedef void(^myCompletion) (BOOL);
 
@@ -121,25 +122,35 @@ typedef void(^myCompletion) (BOOL);
 }
 
 - (IBAction)goToSupplier:(id)sender {
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    
     self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.spinner.frame = CGRectMake(0.0, 0.0, 20.0, 20.0);
     self.spinner.color = [UIColor lightGrayColor];
     self.spinner.center=self.view.center;
     [self.view addSubview:self.spinner];
     [self.spinner startAnimating];
+    
+    if (networkStatus == NotReachable) {
+        [self.spinner stopAnimating];
+        [self.spinner hidesWhenStopped];
+        [self requisitionAlert:@"Favor revise su conexión a internet."];
+    }else{
     [self dbCallSupplier:^(BOOL finished){
-        if(finished){
-            NSLog(@"success");
-            [self.spinner stopAnimating];
-            [self.spinner hidesWhenStopped];
-            [self didSelectSupplier];
-        }else{
-            NSLog(@"finished");
-            [self.spinner stopAnimating];
-            [self.spinner hidesWhenStopped];
-            [self requisitionAlert:@"Un error ha ocurrido, favor intente nuevamente."];
-        }
-    }];
+            if(finished){
+                NSLog(@"success");
+                [self.spinner stopAnimating];
+                [self.spinner hidesWhenStopped];
+                [self didSelectSupplier];
+            }else{
+                NSLog(@"finished");
+                [self.spinner stopAnimating];
+                [self.spinner hidesWhenStopped];
+                [self requisitionAlert:@"Un error ha ocurrido, favor intente nuevamente."];
+            }
+        }];
+    }
 
 }
 
@@ -168,24 +179,33 @@ typedef void(^myCompletion) (BOOL);
                                 actionWithTitle:@"SI"
                                 style:UIAlertActionStyleDefault
                                 handler:^(UIAlertAction * action) {
+                                    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+                                    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+                                    
                                     self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
                                     self.spinner.frame = CGRectMake(0.0, 0.0, 20.0, 20.0);
                                     self.spinner.color = [UIColor lightGrayColor];
                                     self.spinner.center=self.view.center;
                                     [self.view addSubview:self.spinner];
                                     [self.spinner startAnimating];
-                                    [self dbDeclineRequisition:^(BOOL finished){
-                                        if(finished){
-                                            NSLog(@"success");
-                                            [self.spinner stopAnimating];
-                                            [self.spinner hidesWhenStopped];
-                                            [self didDeclineRequisition];
-                                        }else{
-                                            [self.spinner stopAnimating];
-                                            [self.spinner hidesWhenStopped];
-                                            [self requisitionAlert:@"Un error ha ocurrido, favor intente nuevamente."];
-                                        }
-                                    }];
+                                    if (networkStatus == NotReachable) {
+                                        [self.spinner stopAnimating];
+                                        [self.spinner hidesWhenStopped];
+                                        [self requisitionAlert:@"Favor revise su conexión a internet."];
+                                    }else{
+                                        [self dbDeclineRequisition:^(BOOL finished){
+                                            if(finished){
+                                                NSLog(@"success");
+                                                [self.spinner stopAnimating];
+                                                [self.spinner hidesWhenStopped];
+                                                [self didDeclineRequisition];
+                                            }else{
+                                                [self.spinner stopAnimating];
+                                                [self.spinner hidesWhenStopped];
+                                                [self requisitionAlert:@"Un error ha ocurrido, favor intente nuevamente."];
+                                            }
+                                        }];
+                                    }
                                 }];
     
     UIAlertAction* noButton = [UIAlertAction
@@ -213,24 +233,34 @@ typedef void(^myCompletion) (BOOL);
                                 actionWithTitle:@"SI"
                                 style:UIAlertActionStyleDefault
                                 handler:^(UIAlertAction * action) {
+                                    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+                                    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+                                    
                                     self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
                                     self.spinner.frame = CGRectMake(0.0, 0.0, 20.0, 20.0);
                                     self.spinner.color = [UIColor lightGrayColor];
                                     self.spinner.center=self.view.center;
                                     [self.view addSubview:self.spinner];
                                     [self.spinner startAnimating];
-                                    [self dbApproveRequisition:^(BOOL finished){
-                                        if(finished){
-                                            NSLog(@"success");
-                                            [self.spinner stopAnimating];
-                                            [self.spinner hidesWhenStopped];
-                                            [self didApproveRequisition];
-                                        }else{
-                                            [self.spinner stopAnimating];
-                                            [self.spinner hidesWhenStopped];
-                                            [self requisitionAlert:@"Un error ha ocurrido, favor intente nuevamente."];
-                                        }
-                                    }];
+                                    
+                                    if (networkStatus == NotReachable) {
+                                        [self.spinner stopAnimating];
+                                        [self.spinner hidesWhenStopped];
+                                        [self requisitionAlert:@"Favor revise su conexión a internet."];
+                                    }else{
+                                        [self dbApproveRequisition:^(BOOL finished){
+                                            if(finished){
+                                                NSLog(@"success");
+                                                [self.spinner stopAnimating];
+                                                [self.spinner hidesWhenStopped];
+                                                [self didApproveRequisition];
+                                            }else{
+                                                [self.spinner stopAnimating];
+                                                [self.spinner hidesWhenStopped];
+                                                [self requisitionAlert:@"Un error ha ocurrido, favor intente nuevamente."];
+                                            }
+                                        }];
+                                    }
                                 }];
     
     UIAlertAction* noButton = [UIAlertAction
@@ -285,24 +315,35 @@ typedef void(^myCompletion) (BOOL);
     NSDictionary *requisitions = [self.requisitionDetail objectAtIndex:indexPath.row];
     self.productName = requisitions[@"PRODUCTO"];
     self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    
     self.spinner.frame = CGRectMake(0.0, 0.0, 20.0, 20.0);
     self.spinner.color = [UIColor lightGrayColor];
     self.spinner.center=self.view.center;
     [self.view addSubview:self.spinner];
     [self.spinner startAnimating];
-    [self dbCallProduct:^(BOOL finished){
-        if(finished){
-            NSLog(@"success");
-            [self.spinner stopAnimating];
-            [self.spinner hidesWhenStopped];
-            [self didSelectProduct];
-        }else{
-            NSLog(@"finished");
-            [self.spinner stopAnimating];
-            [self.spinner hidesWhenStopped];
-            [self requisitionAlert:@"Un error ha ocurrido, favor intente nuevamente."];
-        }
-    }];
+    
+    if (networkStatus == NotReachable) {
+        [self.spinner stopAnimating];
+        [self.spinner hidesWhenStopped];
+        [self requisitionAlert:@"Favor revise su conexión a internet."];
+    }else{
+        [self dbCallProduct:^(BOOL finished){
+            if(finished){
+                NSLog(@"success");
+                [self.spinner stopAnimating];
+                [self.spinner hidesWhenStopped];
+                [self didSelectProduct];
+            }else{
+                NSLog(@"finished");
+                [self.spinner stopAnimating];
+                [self.spinner hidesWhenStopped];
+                [self requisitionAlert:@"Un error ha ocurrido, favor intente nuevamente."];
+            }
+        }];
+    }
     [self.requisitionDetailTableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

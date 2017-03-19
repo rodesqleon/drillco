@@ -7,6 +7,7 @@
 //
 
 #import "LoginAdminViewController.h"
+#import "Reachability.h"
 
 typedef void(^myCompletion) (BOOL);
 
@@ -59,6 +60,8 @@ typedef void(^myCompletion) (BOOL);
 
 
 - (IBAction)doLogin:(id)sender {
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
     self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.spinner.frame = CGRectMake(0.0, 0.0, 20.0, 20.0);
     self.spinner.color = [UIColor lightGrayColor];
@@ -66,12 +69,20 @@ typedef void(^myCompletion) (BOOL);
     [self.view addSubview:self.spinner];
     [self.spinner startAnimating];
     self.view.userInteractionEnabled = NO;
-    if([self.username_txt.text isEqualToString:@"Sysadm"] && [self.password_txt.text isEqualToString:@"Sy123"]){
-        [self didLogin:self.results];
-    }else{
+    if (networkStatus == NotReachable) {
+        self.view.userInteractionEnabled = YES;
         [self.spinner stopAnimating];
         [self.spinner hidesWhenStopped];
-        [self loginAlertWithString:@"Usuario y/o contraseña incorrectas."];
+        [self loginAlertWithString:@"Favor revise su conexión a internet."];
+    } else {
+        if([self.username_txt.text isEqualToString:@"Sysadm"] && [self.password_txt.text isEqualToString:@"Sy123"]){
+            [self didLogin:self.results];
+        }else{
+            self.view.userInteractionEnabled = YES;
+            [self.spinner stopAnimating];
+            [self.spinner hidesWhenStopped];
+            [self loginAlertWithString:@"Usuario y/o contraseña incorrectas."];
+        }
     }
     
 }

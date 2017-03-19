@@ -28,6 +28,7 @@
 		A46DC3B91E74ED0900A62AE4 /* RequisitionDeclineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A46DC3B71E74ED0900A62AE4 /* RequisitionDeclineViewController.m */; };
 		A46DC3BA1E74ED0900A62AE4 /* RequisitionDeclineView_style_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = A46DC3B81E74ED0900A62AE4 /* RequisitionDeclineView_style_1.xib */; };
 		A4B7CDDC1E71442700EC849D /* libsybdb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4B7CDDB1E71442700EC849D /* libsybdb.a */; };
+		A4BA27391E7CAB9700FEC70A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BA27381E7CAB9700FEC70A /* Reachability.m */; };
 		A4D785031E7B5ABA0032873D /* ProductMoreDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4D785021E7B5ABA0032873D /* ProductMoreDetailViewController.m */; };
 		A4D785051E7B72000032873D /* ProductMoreDetailView_style_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4D785041E7B72000032873D /* ProductMoreDetailView_style_1.xib */; };
 		A4D785081E7B729C0032873D /* ProductMoreDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4D785071E7B729C0032873D /* ProductMoreDetailCell.m */; };
@@ -97,6 +98,8 @@
 		A46DC3B71E74ED0900A62AE4 /* RequisitionDeclineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequisitionDeclineViewController.m; sourceTree = "<group>"; };
 		A46DC3B81E74ED0900A62AE4 /* RequisitionDeclineView_style_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RequisitionDeclineView_style_1.xib; sourceTree = "<group>"; };
 		A4B7CDDB1E71442700EC849D /* libsybdb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsybdb.a; path = Drillco/Libs/SQLClient/libsybdb.a; sourceTree = "<group>"; };
+		A4BA27371E7CAB9700FEC70A /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		A4BA27381E7CAB9700FEC70A /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		A4D785011E7B5ABA0032873D /* ProductMoreDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductMoreDetailViewController.h; sourceTree = "<group>"; };
 		A4D785021E7B5ABA0032873D /* ProductMoreDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductMoreDetailViewController.m; sourceTree = "<group>"; };
 		A4D785041E7B72000032873D /* ProductMoreDetailView_style_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductMoreDetailView_style_1.xib; sourceTree = "<group>"; };
@@ -179,6 +182,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A4BA27361E7CAB9700FEC70A /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				A4BA27371E7CAB9700FEC70A /* Reachability.h */,
+				A4BA27381E7CAB9700FEC70A /* Reachability.m */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
 		A4E481901E6E27EF00D21E34 = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +269,7 @@
 		A4E481D81E6E28CE00D21E34 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				A4BA27361E7CAB9700FEC70A /* Reachability */,
 				A4E481D91E6E28CE00D21E34 /* SQLClient */,
 			);
 			path = Libs;
@@ -501,6 +514,7 @@
 				7B3323B51E7036BB00BB47BB /* RequisitionTableViewController.m in Sources */,
 				A4D785031E7B5ABA0032873D /* ProductMoreDetailViewController.m in Sources */,
 				7B5B9F261E71EAB800D1B7B7 /* ProductCell.m in Sources */,
+				A4BA27391E7CAB9700FEC70A /* Reachability.m in Sources */,
 				A4E4819E1E6E27EF00D21E34 /* main.m in Sources */,
 				7B0F49B41E70901700C6C999 /* RequisitionDetailViewController.m in Sources */,
 				7B5B9F1B1E71DFE200D1B7B7 /* SupplierCell.m in Sources */,

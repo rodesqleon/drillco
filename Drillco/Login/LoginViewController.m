@@ -7,6 +7,8 @@
 //
 
 #import "LoginViewController.h"
+#import "Reachability.h"
+
 
 typedef void(^myCompletion) (BOOL);
 
@@ -23,6 +25,7 @@ typedef void(^myCompletion) (BOOL);
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar.backItem setTitle:@""];
@@ -88,6 +91,9 @@ typedef void(^myCompletion) (BOOL);
 
 
 - (IBAction)doLogin:(id)sender {
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+ 
     self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.spinner.frame = CGRectMake(0.0, 0.0, 20.0, 20.0);
     self.spinner.color = [UIColor lightGrayColor];
@@ -95,17 +101,26 @@ typedef void(^myCompletion) (BOOL);
     [self.view addSubview:self.spinner];
     [self.spinner startAnimating];
     self.view.userInteractionEnabled = NO;
-    [self dbCallLogin:^(BOOL finished){
-        if(finished){
-            NSLog(@"success");
-            [self didLogin:self.results];
-        }else{
-            NSLog(@"finished");
-            [self.spinner stopAnimating];
-            [self.spinner hidesWhenStopped];
-            [self loginAlertWithString:@"Error inicio de sesión, favor intente nuevamente."];
-        }
-    }];
+    if (networkStatus == NotReachable) {
+        self.view.userInteractionEnabled = YES;
+        [self.spinner stopAnimating];
+        [self.spinner hidesWhenStopped];
+        [self loginAlertWithString:@"Favor revise su conexión a internet."];
+    } else {
+        [self dbCallLogin:^(BOOL finished){
+            if(finished){
+                NSLog(@"success");
+                [self didLogin:self.results];
+            }else{
+                NSLog(@"finished");
+                self.view.userInteractionEnabled = YES;
+                [self.spinner stopAnimating];
+                [self.spinner hidesWhenStopped];
+                [self loginAlertWithString:@"Error inicio de sesión, favor intente nuevamente."];
+            }
+        }];
+    }
+    
 }
 
 - (void)didLogin:(NSArray *)results{
