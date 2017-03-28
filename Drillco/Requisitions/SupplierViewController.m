@@ -113,7 +113,7 @@ typedef void(^myCompletion) (BOOL);
     [dateformate setDateFormat:@"dd/MM/yyyy"]; // Date formater
     NSString *date = [dateformate stringFromDate:supplier[@"REQUISITION_DATE"]];
     cell.requisitionDate.text = date;
-    cell.requisitionTotal.text = [supplier[@"total_amt_ordered"] description];
+    cell.requisitionTotal.text = [self formatterAmount:[supplier[@"total_amt_ordered"] description]];
     
     return cell;
 }
@@ -174,5 +174,13 @@ typedef void(^myCompletion) (BOOL);
     productDetail_vc.results = self.results[0];
     [[self navigationController] pushViewController:productDetail_vc animated:YES];
 
+}
+
+#pragma mark - Formatter
+- (NSString *)formatterAmount:(NSString *)amount{
+    NSNumber *number = @([amount intValue]);
+    NSString *str = [NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterCurrencyPluralStyle];
+    return [str stringByReplacingOccurrencesOfString:@","
+                                          withString:@"."];
 }
 @end

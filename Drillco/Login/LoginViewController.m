@@ -29,14 +29,17 @@ typedef void(^myCompletion) (BOOL);
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar.backItem setTitle:@""];
-    
+    [self delegateComponents];
 }
 
-
+- (void)delegateComponents{
+    self.username_txt.delegate = self;
+    self.password_txt.delegate = self;
+}
 
 - (void) dbCallLogin:(myCompletion) dbBlock{
     [self connect];
-    NSString * sql = [@"select u.USER_ID, d.PASSWORD from DRILL_MAE_USUARIO_MOVIL d, GROUP_USER u where u.USER_ID='" stringByAppendingString:[NSString stringWithFormat:@"%@' AND d.PASSWORD='%@'", self.username_txt.text, self.password_txt.text]];
+    NSString * sql = [@"select d.ID, d.PASSWORD from DRILL_MAE_USUARIO_MOVIL d where d.ID='" stringByAppendingString:[NSString stringWithFormat:@"%@' AND d.PASSWORD='%@'", self.username_txt.text, self.password_txt.text]];
     [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
         if (results) {
             self.results = results;
@@ -50,6 +53,24 @@ typedef void(^myCompletion) (BOOL);
         }
     }];
     
+}
+
+- (void) validateUser:(myCompletion) dbBlock{
+    [self connect];
+    NSString * sql = [@"select user_id from group_user where USER_ID='" stringByAppendingString:[NSString stringWithFormat:@"%@'", self.username_txt.text]];
+    [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
+        if (results) {
+            self.results = results;
+            [[SQLClient sharedInstance] disconnect];
+            if(self.results){
+                dbBlock(YES);
+            }
+            
+        }else{
+            dbBlock(NO);
+        }
+    }];
+
 }
 
 - (void) dbCallRequisition:(myCompletion) dbBlock{
@@ -110,7 +131,29 @@ typedef void(^myCompletion) (BOOL);
         [self dbCallLogin:^(BOOL finished){
             if(finished){
                 NSLog(@"success");
-                [self didLogin:self.results];
+                [self validateUser:^(BOOL finished){
+                    if(finished){
+                        if([self.results[0] count] > 0){
+                            NSLog(@"success");
+                            [self.spinner stopAnimating];
+                            [self.spinner hidesWhenStopped];
+                            self.view.userInteractionEnabled = YES;
+                            [self didLogin:self.results];
+                        }else{
+                            NSLog(@"finished");
+                            self.view.userInteractionEnabled = YES;
+                            [self.spinner stopAnimating];
+                            [self.spinner hidesWhenStopped];
+                            [self loginAlertWithString:@"Usuario no existe como Aprobador, contáctese con el Administrador del Sistema para que esto sea regularizado."];
+                        }
+                    }else{
+                        NSLog(@"finished");
+                        self.view.userInteractionEnabled = YES;
+                        [self.spinner stopAnimating];
+                        [self.spinner hidesWhenStopped];
+                        [self loginAlertWithString:@"Usuario no existe como Aprobador, contáctese con el Administrador del Sistema para que esto sea regularizado."];
+                    }
+                }];
             }else{
                 NSLog(@"finished");
                 self.view.userInteractionEnabled = YES;
@@ -189,7 +232,6 @@ typedef void(^myCompletion) (BOOL);
     self.requisitionList_vc.username = self.username_txt.text;
     self.requisitionList_vc.requisition = results[0];
     self.requisitionList_vc.requisition_type = self.requisition_type;
-    self.username_txt.text = @"";
     self.password_txt.text = @"";
     [[self navigationController] pushViewController:self.requisitionList_vc animated:YES];
 }
@@ -203,6 +245,22 @@ typedef void(^myCompletion) (BOOL);
     //hides keyboard when another part of layout was touched
     [self.view endEditing:YES];
     [super touchesBegan:touches withEvent:event];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField*)textField
+{
+    NSInteger nextTag = textField.tag + 1;
+    // Try to find next responder
+    UIResponder* nextResponder = [textField.superview viewWithTag:nextTag];
+    if (nextResponder) {
+        // Found next responder, so set it.
+        [nextResponder becomeFirstResponder];
+    } else {
+        // Not found, so remove keyboard.
+        [textField resignFirstResponder];
+        [self doLogin:nil];
+    }
+    return NO; // We do not want UITextField to insert line-breaks.
 }
 
 - (void)connect

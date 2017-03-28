@@ -12,7 +12,7 @@
 #import "RequisitionTableViewController.h"
 
 
-@interface LoginViewController : UIViewController
+@interface LoginViewController : UIViewController <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *username_txt;
 @property (weak, nonatomic) IBOutlet UITextField *password_txt;
 @property (nonatomic) NSArray * results;

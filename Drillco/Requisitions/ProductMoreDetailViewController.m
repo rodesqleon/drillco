@@ -55,11 +55,20 @@
     NSDictionary *product = [self.results objectAtIndex:indexPath.row];
     NSLog(@"%@", product);
     cell.quantity.text = [product[@"CANTIDAD"] description];
-    cell.unit_cost.text = [product[@"PRECIO UNITARIO"] description];
-    cell.total.text = [product[@"TOTAL FINAL"] description];
+    cell.unit_cost.text = [self formatterAmount:[product[@"PRECIO UNITARIO"] description]];
+    cell.total.text = [self formatterAmount:[product[@"TOTAL FINAL"] description]];
     cell.product.text = [product[@"PRODUCTO"] description];
     
     return cell;
 }
+
+#pragma mark - Formatter
+- (NSString *)formatterAmount:(NSString *)amount{
+    NSNumber *number = @([amount intValue]);
+    NSString *str = [NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterCurrencyPluralStyle];
+    return [str stringByReplacingOccurrencesOfString:@","
+                                          withString:@"."];
+}
+
 
 @end

@@ -305,8 +305,8 @@ typedef void(^myCompletion) (BOOL);
     NSDictionary *requisitions = [self.requisitionDetail objectAtIndex:indexPath.row];
     cell.providerName.text = requisitions[@"PRODUCTO"];
     cell.quantity.text = [requisitions[@"CANTIDAD"] description];
-    cell.single_amount.text = [requisitions[@"PRECIO UNITARIO"] description];
-    cell.total_amount.text = [requisitions[@"TOTAL FINAL"] description];
+    cell.single_amount.text = [self formatterAmount:[requisitions[@"PRECIO UNITARIO"] description]];
+    cell.total_amount.text = [self formatterAmount:[requisitions[@"TOTAL FINAL"] description]];
     
     return cell;
 }
@@ -379,6 +379,14 @@ typedef void(^myCompletion) (BOOL);
 {
     NSString* message = notification.userInfo[SQLClientMessageKey];
     NSLog(@"Message: %@", message);
+}
+
+#pragma mark - Formatter
+- (NSString *)formatterAmount:(NSString *)amount{
+    NSNumber *number = @([amount intValue]);
+    NSString *str = [NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterCurrencyPluralStyle];
+    return [str stringByReplacingOccurrencesOfString:@","
+                                          withString:@"."];
 }
 
 @end

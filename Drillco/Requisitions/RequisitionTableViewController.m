@@ -208,7 +208,7 @@ typedef void(^myCompletion) (BOOL);
     NSDictionary *requisitions = [self.requisition objectAtIndex:indexPath.row];
     cell.requisition_ID.text = requisitions[@"ID"];
     cell.requisition_VENDOR_ID.text = requisitions[@"VENDOR_ID"];
-    cell.requisition_CURRENCY_ID.text = [requisitions[@"CURRENCY_ID"] stringByAppendingString:[NSString stringWithFormat:@" %@",requisitions[@"AMOUNT"]]];
+    cell.requisition_CURRENCY_ID.text = [requisitions[@"CURRENCY_ID"] stringByAppendingString:[NSString stringWithFormat:@" %@",[self formatterAmount:requisitions[@"AMOUNT"]]]];
    
     NSDateFormatter *dateformate=[[NSDateFormatter alloc]init];
     [dateformate setDateFormat:@"dd/MM/yyyy"]; // Date formater
@@ -285,5 +285,14 @@ typedef void(^myCompletion) (BOOL);
     NSString* message = notification.userInfo[SQLClientMessageKey];
     NSLog(@"Message: %@", message);
 }
+#pragma mark - Formatter
+- (NSString *)formatterAmount:(NSString *)amount{
+    NSNumber *number = @([amount intValue]);
+    NSString *str = [NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterCurrencyPluralStyle];
+    return [str stringByReplacingOccurrencesOfString:@","
+                                          withString:@"."];
+}
+
+
 
 @end

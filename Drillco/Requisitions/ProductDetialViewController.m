@@ -58,12 +58,20 @@ typedef void(^myCompletion) (BOOL);
     }
     NSDictionary *product = [self.products objectAtIndex:indexPath.row];
     cell.productMONEY.text = [product[@"MONEDA"] description];
-    cell.productSINGLE_AMOUNT.text = [product[@"PRECIO UNIT"] description];
+    cell.productSINGLE_AMOUNT.text = [self formatterAmount:[product[@"PRECIO UNIT"] description]];
     cell.productSUPPLIER_NAME.text = [product[@"NOMBRE PROVEEDOR"] description];
     return cell;
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.productTabelView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - Formatter
+- (NSString *)formatterAmount:(NSString *)amount{
+    NSNumber *number = @([amount intValue]);
+    NSString *str = [NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterCurrencyPluralStyle];
+    return [str stringByReplacingOccurrencesOfString:@","
+                                          withString:@"."];
 }
 @end
