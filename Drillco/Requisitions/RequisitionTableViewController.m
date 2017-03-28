@@ -215,7 +215,7 @@ typedef void(^myCompletion) (BOOL);
     NSString *date = [dateformate stringFromDate:requisitions[@"DESIRED_RECV_DATE"]];
     
     cell.requisition_DESIRED_RECV_DATE.text = date;
-    cell.requisition_NAME.text = requisitions[@"NAME"];
+    cell.requisition_NAME.text = [[requisitions[@"NAME"] description] uppercaseString];
     
     return cell;
 }

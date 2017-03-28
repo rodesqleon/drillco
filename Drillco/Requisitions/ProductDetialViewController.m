@@ -33,8 +33,29 @@ typedef void(^myCompletion) (BOOL);
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.translucent = NO;
     self.productName_lbl.text = self.productName;
+    [self checkProducts];
 }
 
+- (void)checkProducts{
+    if([self.products count] > 0){
+        self.productTabelView.backgroundView = nil;
+        self.productTabelView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    }else{
+        [self.spinner stopAnimating];
+        [self.spinner hidesWhenStopped];
+        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        messageLabel.text = @"No existen historias asociadas al producto.";
+        messageLabel.textColor = [UIColor grayColor];
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = NSTextAlignmentCenter;
+        messageLabel.font = [UIFont fontWithName:@"Helvética Neue" size:20];
+        [messageLabel sizeToFit];
+        
+        self.productTabelView.backgroundView = messageLabel;
+        self.productTabelView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    [self.productTabelView reloadData];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

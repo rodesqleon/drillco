@@ -140,7 +140,7 @@ typedef void(^myCompletion) (BOOL);
                 NSLog(@"success");
                 [self.spinner stopAnimating];
                 [self.spinner hidesWhenStopped];
-                [self didProductDetail];
+                [self didProductDetail:product[@"ID"]];
             }else{
                 NSLog(@"finished");
                 [self.spinner stopAnimating];
@@ -169,9 +169,10 @@ typedef void(^myCompletion) (BOOL);
     
 }
 
-- (void) didProductDetail{
+- (void) didProductDetail:(NSString *) product_id{
     ProductMoreDetailViewController *productDetail_vc = [[ProductMoreDetailViewController alloc] initWithNibName:@"ProductMoreDetailView_style_1" bundle:nil];
     productDetail_vc.results = self.results[0];
+    productDetail_vc.requisition_num = product_id;
     [[self navigationController] pushViewController:productDetail_vc animated:YES];
 
 }

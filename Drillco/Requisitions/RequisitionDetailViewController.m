@@ -37,7 +37,7 @@ typedef void(^myCompletion) (BOOL);
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.translucent = NO;
     self.title = [NSString stringWithFormat:@"Detalle Nº%@",self.requisition_id];
-    self.providerName_lbl.text = self.provider_name;
+    self.providerName_lbl.text = [self.provider_name uppercaseString];
     [self connect];
 
 }

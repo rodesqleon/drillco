@@ -29,7 +29,7 @@
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.translucent = NO;
     NSDictionary * product = [self.results objectAtIndex:0];
-    self.requisition_number.text = product[@"ID"];
+    self.requisition_number.text = self.requisition_num;
 }
 
 - (void)didReceiveMemoryWarning {

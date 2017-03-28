@@ -42,12 +42,15 @@ typedef void(^myCompletion) (BOOL);
     NSString * sql = [@"select d.ID, d.PASSWORD from DRILL_MAE_USUARIO_MOVIL d where d.ID='" stringByAppendingString:[NSString stringWithFormat:@"%@' AND d.PASSWORD='%@'", self.username_txt.text, self.password_txt.text]];
     [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
         if (results) {
-            self.results = results;
-            [[SQLClient sharedInstance] disconnect];
-            if(self.results){
-                dbBlock(YES);
+            if([results[0] count] > 0){
+                self.results = results;
+                [[SQLClient sharedInstance] disconnect];
+                if(self.results){
+                    dbBlock(YES);
+                }
+            }else{
+                dbBlock(NO);
             }
-            
         }else{
             dbBlock(NO);
         }

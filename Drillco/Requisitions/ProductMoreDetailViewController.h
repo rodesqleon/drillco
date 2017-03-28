@@ -11,4 +11,5 @@
 @interface ProductMoreDetailViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UILabel *requisition_number;
 @property (nonatomic) NSArray *results;
+@property (nonatomic) NSString *requisition_num;
 @end
