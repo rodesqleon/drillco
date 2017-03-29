@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *password_txt;
 @property (nonatomic) NSArray * results;
 @property (nonatomic) NSString *requisition_type;
+@property (nonatomic) NSString *requisition_limit;
 @property (nonatomic) LoginAdminViewController *loginAdmin_vc;
 @property (nonatomic) RequisitionTableViewController *requisitionList_vc;
 

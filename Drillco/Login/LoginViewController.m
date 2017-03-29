@@ -107,6 +107,23 @@ typedef void(^myCompletion) (BOOL);
     }];
 }
 
+- (void) dbCallRequisitionLimit:(myCompletion) dbBlock{
+    [self connect];
+    NSString * sql = [NSString stringWithFormat:@"select CAST(REPLACE(PROFILE_STRING,'Limit=','') AS numeric) AS LIMIT from USER_PGM_AUTHORITY where USER_ID = '%@' AND PROFILE_STRING is not null and PROGRAM_ID = 'VMREQENT'", self.username_txt.text];
+    [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
+        if (results) {
+            NSDictionary *dict = [results[0] objectAtIndex:0];
+            self.requisition_limit = dict[@"LIMIT"];
+            [[SQLClient sharedInstance] disconnect];
+            if(self.requisition_type){
+                dbBlock(YES);
+            }
+            
+        }
+    }];
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -180,14 +197,22 @@ typedef void(^myCompletion) (BOOL);
                     [self dbCallRequisitionType:^(BOOL finished){
                         if(finished){
                             NSLog(@"success");
-                            [self.spinner stopAnimating];
-                            [self.spinner hidesWhenStopped];
-                            self.view.userInteractionEnabled = YES;
-                            
-                            [self didRequisitionList:self.results];
-                            
+                            [self dbCallRequisitionLimit:^(BOOL finished){
+                                if(finished){
+                                    [self.spinner stopAnimating];
+                                    [self.spinner hidesWhenStopped];
+                                    self.view.userInteractionEnabled = YES;
+                                    [self didRequisitionList:self.results Limit:self.requisition_limit];
+                                }else{
+                                    NSLog(@"finished");
+                                    self.view.userInteractionEnabled = YES;
+                                    [self.spinner stopAnimating];
+                                    [self.spinner hidesWhenStopped];
+                                }
+                            }];
                         }else{
                             NSLog(@"finished");
+                            self.view.userInteractionEnabled = YES;
                             [self.spinner stopAnimating];
                             [self.spinner hidesWhenStopped];
                         }
@@ -195,6 +220,7 @@ typedef void(^myCompletion) (BOOL);
                     
                 }else{
                     NSLog(@"finished");
+                    self.view.userInteractionEnabled = YES;
                     [self.spinner stopAnimating];
                     [self.spinner hidesWhenStopped];
                 }
@@ -230,11 +256,12 @@ typedef void(^myCompletion) (BOOL);
     
 }
 
-- (void)didRequisitionList:(NSArray *)results{
+- (void)didRequisitionList:(NSArray *)results Limit:(NSString *) limit{
     self.requisitionList_vc = [[RequisitionTableViewController alloc] initWithNibName:@"RequisitionListView_style_1" bundle:nil];
     self.requisitionList_vc.username = self.username_txt.text;
     self.requisitionList_vc.requisition = results[0];
     self.requisitionList_vc.requisition_type = self.requisition_type;
+    self.requisitionList_vc.requisition_limit = limit;
     self.password_txt.text = @"";
     [[self navigationController] pushViewController:self.requisitionList_vc animated:YES];
 }

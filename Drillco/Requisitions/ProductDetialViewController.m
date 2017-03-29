@@ -65,6 +65,7 @@ typedef void(^myCompletion) (BOOL);
 #pragma mark - Table view data source
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSLog(@"%@", self.products);
     return [self.products count];
 }
 

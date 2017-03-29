@@ -76,15 +76,24 @@ typedef void(^myCompletion) (BOOL);
         [self.spinner hidesWhenStopped];
         [self requisitionAlert:@"Favor revise su conexión a internet."];
     }else{
+        
         [self dbCallRequisition:^(BOOL finished){
             if(finished){
                 NSLog(@"success");
                 [self dbCallRequisitionType:^(BOOL finished){
                     if(finished){
                         NSLog(@"success");
-                        [self.spinner stopAnimating];
-                        [self.spinner hidesWhenStopped];
-                        [self reloadData];
+                        [self dbCallRequisitionLimit:^(BOOL finished) {
+                            if(finished){
+                                [self.spinner stopAnimating];
+                                [self.spinner hidesWhenStopped];
+                                [self reloadData];
+                            }else{
+                                [self.spinner stopAnimating];
+                                [self.spinner hidesWhenStopped];
+                                [self requisitionAlert:@"Un error ha ocurrido, favor tire hacía abajo para refrescar."];
+                            }
+                        }];
                     }else{
                         NSLog(@"finished");
                         [self.spinner stopAnimating];
@@ -144,7 +153,7 @@ typedef void(^myCompletion) (BOOL);
     NSString * sql = [NSString stringWithFormat:@"select pl.LINE_NO as [LINEA], pl.PART_ID as [CODIGO PRODUCTO], (case isnull(p.description,'') when '' then CONVERT(VARCHAR(200),CONVERT(VARBINARY(200),pb.bits)) else p.DESCRIPTION end) as [PRODUCTO], pl.ORDER_QTY as [CANTIDAD], pl.UNIT_PRICE as [PRECIO UNITARIO], pl.ORDER_QTY * pl.UNIT_PRICE as [TOTAL FINAL] from PURC_REQ_LINE pl,PURC_REQ_LN_BINARY pb, PART p where pl.PURC_REQ_ID = '%@' and pl.PURC_REQ_ID *= pb.PURC_REQ_ID and pl.LINE_NO *= pb.PURC_REQ_LINE_NO and pl.PART_ID *= p.id order by pl.line_no", requisitionId];
     [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
         if (results) {
-            self.requisition = results;
+            self.requisition_detail = results;
             [[SQLClient sharedInstance] disconnect];
             if(self.requisition){
                 dbBlock(YES);
@@ -185,15 +194,47 @@ typedef void(^myCompletion) (BOOL);
     }];
 }
 
+- (void) dbCallRequisitionLimit:(myCompletion) dbBlock{
+    [self connect];
+    NSString * sql = [NSString stringWithFormat:@"select CAST(REPLACE(PROFILE_STRING,'Limit=','') AS numeric) AS LIMIT from USER_PGM_AUTHORITY where USER_ID = '%@' AND PROFILE_STRING is not null and PROGRAM_ID = 'VMREQENT'", self.username];
+    [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
+        if (results) {
+            NSDictionary *dict = [results[0] objectAtIndex:0];
+            self.requisition_limit = dict[@"LIMIT"];
+            [[SQLClient sharedInstance] disconnect];
+            if(self.requisition_type){
+                dbBlock(YES);
+            }
+            
+        }
+    }];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+- (NSInteger) checkRequisitonByLimit{
+    if(self.requisition_limit){
+        NSMutableArray *filter_requisiton = [NSMutableArray new];
+        for(int i = 0 ; i < [self.requisition count] ; i++){
+            NSDictionary * dict  = [self.requisition objectAtIndex:i];
+            if([dict[@"AMOUNT"] floatValue] <= [self.requisition_limit floatValue]){
+                [filter_requisiton addObject:self.requisition[i]];
+            }
+        }
+        self.requisition = filter_requisiton;
+        return [self.requisition count];
+    }else{
+        return [self.requisition count];
+    }
+}
+
 #pragma mark - Table view data source
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.requisition count];
+    return [self checkRequisitonByLimit];
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -247,7 +288,7 @@ typedef void(^myCompletion) (BOOL);
 
 - (void) didRequisitionDetail{
     self.requisitionDetail_vc = [[RequisitionDetailViewController alloc] initWithNibName:@"RequisitionDetailView_style_1" bundle:nil];
-    self.requisitionDetail_vc.requisitionDetail = self.requisition[0];
+    self.requisitionDetail_vc.requisitionDetail = self.requisition_detail[0];
     self.requisitionDetail_vc.provider_name = self.info[@"NAME"];
     self.requisitionDetail_vc.requisition_id = self.info[@"ID"];
     self.requisitionDetail_vc.requisition_type = self.requisition_type;

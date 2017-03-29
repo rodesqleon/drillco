@@ -15,7 +15,9 @@
 @property (strong, nonatomic) NSString * username;
 @property (nonatomic) NSString * requisition_id;
 @property (strong, nonatomic) NSArray * requisition;
+@property (strong, nonatomic) NSArray * requisition_detail;
 @property (nonatomic) NSDictionary * info;
 @property (nonatomic) RequisitionDetailViewController * requisitionDetail_vc;
 @property (nonatomic) NSString *requisition_type;
+@property (nonatomic) NSString *requisition_limit;
 @end

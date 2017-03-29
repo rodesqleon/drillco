@@ -33,7 +33,7 @@ typedef void(^myCompletion) (BOOL);
     [super viewWillAppear:animated];
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.translucent = NO;
-    self.supplierName_lbl.text = self.supplierName;
+    self.supplierName_lbl.text = [self.supplierName uppercaseString];
 }
 
 - (void)didReceiveMemoryWarning {
