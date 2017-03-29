@@ -28,8 +28,7 @@
     [super viewWillAppear:animated];
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.translucent = NO;
-    NSDictionary * product = [self.results objectAtIndex:0];
-    self.requisition_number.text = self.requisition_num;
+     self.requisition_number.text = self.requisition_num;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,7 +43,7 @@
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60;
+    return 82;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,35 +16,40 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yny-kk-EQj" id="dNE-Ks-fia">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PXg-WJ-lLR">
-                        <rect key="frame" x="8" y="21.5" width="34.5" height="16.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10101010" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PXg-WJ-lLR">
+                        <rect key="frame" x="8" y="8" width="62.5" height="43.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSL-Sr-YJh">
-                        <rect key="frame" x="170.5" y="21.5" width="34.5" height="16.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99/99/99999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSL-Sr-YJh">
+                        <rect key="frame" x="148" y="8" width="79.5" height="43.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gE-av-AY7">
-                        <rect key="frame" x="308.5" y="21.5" width="34.5" height="16.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999.999.999.999 US DOLLAR" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gE-av-AY7">
+                        <rect key="frame" x="235.5" y="8" width="123.5" height="43.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="xSL-Sr-YJh" firstAttribute="centerX" secondItem="dNE-Ks-fia" secondAttribute="centerX" id="8t3-eu-94R"/>
-                    <constraint firstItem="PXg-WJ-lLR" firstAttribute="leading" secondItem="dNE-Ks-fia" secondAttribute="leadingMargin" id="Bnv-1b-wuN"/>
-                    <constraint firstItem="4gE-av-AY7" firstAttribute="centerY" secondItem="xSL-Sr-YJh" secondAttribute="centerY" id="IeE-bW-RQD"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="4gE-av-AY7" secondAttribute="trailing" constant="24" id="PIr-ix-Whr"/>
-                    <constraint firstItem="PXg-WJ-lLR" firstAttribute="centerY" secondItem="dNE-Ks-fia" secondAttribute="centerY" id="YZk-ri-ba6"/>
-                    <constraint firstItem="xSL-Sr-YJh" firstAttribute="centerY" secondItem="PXg-WJ-lLR" secondAttribute="centerY" id="tpY-G8-4yd"/>
+                    <constraint firstItem="PXg-WJ-lLR" firstAttribute="leading" secondItem="dNE-Ks-fia" secondAttribute="leadingMargin" id="2P8-q8-VBj"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="xSL-Sr-YJh" secondAttribute="bottom" id="JMi-ze-QRg"/>
+                    <constraint firstItem="xSL-Sr-YJh" firstAttribute="centerY" secondItem="dNE-Ks-fia" secondAttribute="centerY" id="MCH-rT-yD7"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="4gE-av-AY7" secondAttribute="trailing" constant="8" id="YVK-Es-pJ2"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="PXg-WJ-lLR" secondAttribute="bottom" id="Zky-GB-Ltt"/>
+                    <constraint firstItem="PXg-WJ-lLR" firstAttribute="top" secondItem="dNE-Ks-fia" secondAttribute="topMargin" id="eIW-ma-QcU"/>
+                    <constraint firstItem="4gE-av-AY7" firstAttribute="leading" secondItem="xSL-Sr-YJh" secondAttribute="trailing" constant="8" id="hru-0F-Bor"/>
+                    <constraint firstItem="xSL-Sr-YJh" firstAttribute="centerX" secondItem="dNE-Ks-fia" secondAttribute="centerX" id="iTz-eA-GPE"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="4gE-av-AY7" secondAttribute="bottom" id="ouD-v5-3LC"/>
+                    <constraint firstItem="xSL-Sr-YJh" firstAttribute="top" secondItem="dNE-Ks-fia" secondAttribute="topMargin" id="wcE-gU-kqd"/>
+                    <constraint firstItem="4gE-av-AY7" firstAttribute="top" secondItem="dNE-Ks-fia" secondAttribute="topMargin" id="zgp-iJ-7L1"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
