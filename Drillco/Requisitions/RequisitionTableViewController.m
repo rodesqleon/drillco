@@ -42,10 +42,12 @@ typedef void(^myCompletion) (BOOL);
     self.navigationController.navigationBar.translucent = NO;
     self.title = @"Requisiciones";
     self.username_lbl.text = self.username;
-    self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    self.spinner.frame = CGRectMake(0.0, 0.0, 20.0, 20.0);
-    self.spinner.color = [UIColor lightGrayColor];
-    self.spinner.center=self.view.center;
+    if(self.spinner){
+        self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        self.spinner.frame = CGRectMake(0.0, 0.0, 20.0, 20.0);
+        self.spinner.color = [UIColor lightGrayColor];
+        self.spinner.center=self.view.center;
+    }
     [self.view addSubview:self.spinner];
     [self.spinner startAnimating];
     [self goForRequisitions];
