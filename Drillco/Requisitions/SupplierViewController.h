@@ -14,4 +14,5 @@
 @property (nonatomic) NSString *supplierName;
 @property (nonatomic) NSArray *supplier_result;
 @property (nonatomic) NSArray *results;
+@property (nonatomic) NSMutableArray *supplierTotal;
 @end

@@ -16,6 +16,8 @@ typedef void(^myCompletion) (BOOL);
 @interface SupplierViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *supplierDetailTableView;
 @property (nonatomic) UIActivityIndicatorView *spinner;
+@property (nonatomic) NSArray *totalAmount;
+@property (nonatomic) int amount;
 
 
 @end
@@ -24,9 +26,10 @@ typedef void(^myCompletion) (BOOL);
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Proveedor";
-    [self.supplierDetailTableView registerNib:[UINib nibWithNibName:@"SupplierViewCell_style_1" bundle:nil] forCellReuseIdentifier:@"SupplierIdentifier"];
-    self.supplierDetailTableView.dataSource = self;
+        self.title = @"Proveedor";
+        [self.supplierDetailTableView registerNib:[UINib nibWithNibName:@"SupplierViewCell_style_1" bundle:nil] forCellReuseIdentifier:@"SupplierIdentifier"];
+        self.supplierDetailTableView.dataSource = self;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -114,6 +117,11 @@ typedef void(^myCompletion) (BOOL);
     NSString *date = [dateformate stringFromDate:supplier[@"REQUISITION_DATE"]];
     cell.requisitionDate.text = date;
     cell.requisitionTotal.text = [self formatterAmount:[supplier[@"total_amt_ordered"] description]];
+    
+    if([self.supplierTotal count] > 0){
+            NSDictionary *dict = [self.supplierTotal objectAtIndex:indexPath.row];
+            cell.requisitionTotal.text = [self formatterAmount:[dict[@"total"] description]];
+    }
     
     return cell;
 }

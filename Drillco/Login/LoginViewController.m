@@ -155,9 +155,6 @@ typedef void(^myCompletion) (BOOL);
                     if(finished){
                         if([self.results[0] count] > 0){
                             NSLog(@"success");
-                            [self.spinner stopAnimating];
-                            [self.spinner hidesWhenStopped];
-                            self.view.userInteractionEnabled = YES;
                             [self didLogin:self.results];
                         }else{
                             NSLog(@"finished");
@@ -199,9 +196,6 @@ typedef void(^myCompletion) (BOOL);
                             NSLog(@"success");
                             [self dbCallRequisitionLimit:^(BOOL finished){
                                 if(finished){
-                                    [self.spinner stopAnimating];
-                                    [self.spinner hidesWhenStopped];
-                                    self.view.userInteractionEnabled = YES;
                                     [self didRequisitionList:self.results Limit:self.requisition_limit];
                                 }else{
                                     NSLog(@"finished");
@@ -257,6 +251,9 @@ typedef void(^myCompletion) (BOOL);
 }
 
 - (void)didRequisitionList:(NSArray *)results Limit:(NSString *) limit{
+    [self.spinner stopAnimating];
+    [self.spinner hidesWhenStopped];
+    self.view.userInteractionEnabled = YES;
     self.requisitionList_vc = [[RequisitionTableViewController alloc] initWithNibName:@"RequisitionListView_style_1" bundle:nil];
     self.requisitionList_vc.username = self.username_txt.text;
     self.requisitionList_vc.requisition = results[0];

@@ -27,8 +27,13 @@ typedef void(^myCompletion) (BOOL);
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.translucent = NO;
     self.title = @"";
+    [self delegateComponents];
 }
 
+- (void)delegateComponents{
+    self.username_txt.delegate = self;
+    self.password_txt.delegate = self;
+}
 
 
 - (void) dbCallLogin:(myCompletion) dbBlock{
@@ -137,6 +142,23 @@ typedef void(^myCompletion) (BOOL);
     [self.view endEditing:YES];
     [super touchesBegan:touches withEvent:event];
 }
+
+-(BOOL)textFieldShouldReturn:(UITextField*)textField
+{
+    NSInteger nextTag = textField.tag + 1;
+    // Try to find next responder
+    UIResponder* nextResponder = [textField.superview viewWithTag:nextTag];
+    if (nextResponder) {
+        // Found next responder, so set it.
+        [nextResponder becomeFirstResponder];
+    } else {
+        // Not found, so remove keyboard.
+        [textField resignFirstResponder];
+        [self doLogin:nil];
+    }
+    return NO; // We do not want UITextField to insert line-breaks.
+}
+
 
 - (void)connect
 {

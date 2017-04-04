@@ -14,6 +14,7 @@
 #import "Reachability.h"
 
 typedef void(^myCompletion) (BOOL);
+typedef void(^my2Completion) (BOOL);
 
 @interface RequisitionDetailViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *requisitionDetailTableView;
@@ -21,6 +22,8 @@ typedef void(^myCompletion) (BOOL);
 @property (nonatomic) NSString * productName;
 @property (nonatomic) UIActivityIndicatorView *spinner;
 @property (nonatomic) BOOL connection;
+@property (nonatomic) NSMutableArray *supplierTotal;
+@property (nonatomic) NSArray *supplier_result;
 @end
 
 @implementation RequisitionDetailViewController
@@ -155,10 +158,95 @@ typedef void(^myCompletion) (BOOL);
 }
 
 - (void) didSelectSupplier{
+    
+    [self preloadTotalAmount];
+}
+
+- (void)preloadTotalAmount{
+    self.supplierTotal = [NSMutableArray new];
     SupplierViewController *supplier_vc = [[SupplierViewController alloc] initWithNibName:@"SupplierView_style_1" bundle:nil];
     supplier_vc.supplierName = self.provider_name;
+    self.supplier_result =  self.results;
     supplier_vc.supplier_result = self.results;
-    [[self navigationController] pushViewController:supplier_vc animated:YES];
+    [self callTotalAmountForRequisitionBlock:^(BOOL finished){
+        if(finished){
+            NSLog(@"success");
+            supplier_vc.supplierTotal = self.supplierTotal;
+            [[self navigationController] pushViewController:supplier_vc animated:YES];
+        }else{
+            NSLog(@"finished");
+            [self.spinner stopAnimating];
+            [self.spinner hidesWhenStopped];
+        }
+    }];
+
+}
+
+- (void) dbCallTotalAmountForEachNum:(NSString *) requisitionId Block:(myCompletion) dbBlock {
+    [self connect];
+    NSString * sql = [NSString stringWithFormat:@"select pl.ORDER_QTY * pl.UNIT_PRICE as [TOTAL_FINAL] from PURC_REQ_LINE pl,PURC_REQ_LN_BINARY pb, PART p where pl.PURC_REQ_ID = '%@' and pl.PURC_REQ_ID *= pb.PURC_REQ_ID and pl.LINE_NO *= pb.PURC_REQ_LINE_NO and pl.PART_ID *= p.id order by pl.line_no", requisitionId];
+    [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
+        if (results) {
+            self.totalAmountByRequisition = results;
+            NSLog(@"%@", self.totalAmountByRequisition);
+            [[SQLClient sharedInstance] disconnect];
+            if(self.totalAmountByRequisition){
+                dbBlock(YES);
+            }
+            
+        }
+    }];
+}
+
+- (void) callTotalAmountForRequisitionBlock:(myCompletion) dbBlock{
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    
+    
+    if (networkStatus == NotReachable) {
+        [self.spinner stopAnimating];
+        [self.spinner hidesWhenStopped];
+        [self requisitionAlert:@"Favor revise su conexión a internet."];
+    }else{
+        [self blockToDoMore:^(BOOL finished) {
+            if(finished){
+                    dbBlock(YES);
+            }else{
+                
+            }
+        }];
+    }
+
+}
+
+- (void) blockToDoMore:(my2Completion) dbBlock{
+    NSString *requisition_id;
+    for(int i = 0 ; i < [self.results count] ; i++){
+        NSDictionary *supplier = [self.results objectAtIndex:i];
+        requisition_id = supplier[@"ID"] ;
+        [self dbCallTotalAmountForEachNum:requisition_id Block:^(BOOL finished){
+            if(finished){
+                NSLog(@"success");
+                float total = 0.0;
+                for(int j = 0 ; j < [self.totalAmountByRequisition[0] count] ; j++){
+                    NSDictionary *dict = [self.totalAmountByRequisition[0] objectAtIndex:j];
+                    total += [dict[@"TOTAL_FINAL"] floatValue];
+                }
+                NSString *totalAmount = [NSString stringWithFormat:@"%.02f", total];
+                NSMutableDictionary * dict = [NSMutableDictionary new];
+                [dict setValue:totalAmount forKey:@"total"];
+                [self.supplierTotal addObject:dict];
+                if([self.supplier_result count] == [self.supplierTotal count]){
+                    dbBlock(YES);
+                }
+            }else{
+                NSLog(@"finished");
+            }
+        }];
+    }
+    
+    
+
 }
 
 - (void) didSelectProduct{

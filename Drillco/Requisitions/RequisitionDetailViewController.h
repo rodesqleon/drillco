@@ -16,4 +16,5 @@
 @property (nonatomic) NSString *requisition_id;
 @property (nonatomic) NSString *requisition_type;
 @property (nonatomic) NSString *username;
+@property (nonatomic) NSArray *totalAmountByRequisition;
 @end
