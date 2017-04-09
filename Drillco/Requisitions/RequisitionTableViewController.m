@@ -130,8 +130,37 @@ typedef void(^myCompletion) (BOOL);
 
     
     if([self.requisition count] > 0){
-        self.requisitionTableView.backgroundView = nil;
-        self.requisitionTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        if(self.requisition_limit){
+            NSMutableArray *filter_requisiton = [NSMutableArray new];
+            for(int i = 0 ; i < [self.requisition count] ; i++){
+                NSDictionary * dict  = [self.requisition objectAtIndex:i];
+                if([dict[@"AMOUNT"] floatValue] <= [self.requisition_limit floatValue]){
+                    [filter_requisiton addObject:self.requisition[i]];
+                }
+            }
+            self.requisition = filter_requisiton;
+             if([self.requisition count] > 0){
+                 self.requisitionTableView.backgroundView = nil;
+                 self.requisitionTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+             }else{
+                 [self.spinner stopAnimating];
+                 [self.spinner hidesWhenStopped];
+                 UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+                 messageLabel.text = @"No existen requisiciones pendientes.";
+                 messageLabel.textColor = [UIColor grayColor];
+                 messageLabel.numberOfLines = 0;
+                 messageLabel.textAlignment = NSTextAlignmentCenter;
+                 messageLabel.font = [UIFont fontWithName:@"Helvética Neue" size:20];
+                 [messageLabel sizeToFit];
+                 
+                 self.requisitionTableView.backgroundView = messageLabel;
+                 self.requisitionTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+             }
+        }else{
+            self.requisitionTableView.backgroundView = nil;
+            self.requisitionTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+
+        }
     }else{
         [self.spinner stopAnimating];
         [self.spinner hidesWhenStopped];
