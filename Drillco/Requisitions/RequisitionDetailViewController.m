@@ -102,8 +102,7 @@ typedef void(^my2Completion) (BOOL);
 
 - (void) dbApproveRequisition:(myCompletion) dbBlock{
     if(self.connection){
-    //NSString *sql = [NSString stringWithFormat:@"UPDATE PURC_REQUISITION set STATUS = 'V', ASSIGNED_TO = 'FPADILLA', APP1_DATE = getdate(), APP2_DATE = getdate(), USER_10 = 'APP_MOVIL' where ID = '%@'; update purc_req_line set line_status = 'V' where purc_req_id = '%@'; UPDATE TASK SET USER_ID = 'FPADILLA', STATUS = 'P' WHERE EC_ID = '%@' AND SEQ_NO = 1 AND SUB_TYPE = 'AT';", self.requisition_id, self.requisition_id, self.requisition_id];
-    NSString *sql = [NSString stringWithFormat:@"UPDATE PURC_REQUISITION set STATUS = 'V', ASSIGNED_TO = 'GRIVERA', APP1_DATE = getdate(), APP2_DATE = getdate(), USER_9 = '%@', USER_10 = 'APP_MOVIL' where ID = '%@'; update purc_req_line set line_status = 'V' where purc_req_id = '%@'; select top 1 task_no,seq_no from TASK where EC_ID = '%@' order by seq_no desc UPDATE TASK SET USER_ID = 'GRIVERA', STATUS = 'P' WHERE EC_ID = '%@' AND SEQ_NO = 1 AND SUB_TYPE = 'AT' UPDATE TASK SET COMPLETED_DATE = getdate(), STATUS_EFF_DATE = getdate(), STATUS = 'C' WHERE EC_ID = '%@' AND SEQ_NO > 1 insert TASK (TYPE, TASK_NO, SEQ_NO, USER_ID, SUB_TYPE, EC_ID, STATUS, COMPLETED_DATE) select TYPE, TASK_NO, SEQ_NO + 1, '%@', '%@', EC_ID, 'C', GETDATE() from task where ec_id = '%@' and SEQ_NO = 1 and SUB_TYPE = 'AT';", self.username, self.requisition_id, self.requisition_id, self.requisition_id, self.requisition_id, self.requisition_id, self.username, self.requisition_type, self.requisition_id];
+    NSString *sql = [NSString stringWithFormat:@"UPDATE PURC_REQUISITION set STATUS = 'V', ASSIGNED_TO = 'GRIVERA', APP1_DATE = getdate(), APP2_DATE = getdate(), USER_9 = '%@', USER_10 = 'APP_MOVIL' where ID = '%@'; update purc_req_line set line_status = 'V' where purc_req_id = '%@'; select top 1 task_no,seq_no from TASK where EC_ID = '%@' order by seq_no desc UPDATE TASK SET USER_ID = 'GRIVERA', STATUS = 'P' WHERE EC_ID = '%@' AND SEQ_NO = 1 AND SUB_TYPE = 'AT' UPDATE TASK SET COMPLETED_DATE = getdate(), STATUS_EFF_DATE = getdate(), STATUS = 'C' WHERE EC_ID = '%@' AND SEQ_NO > 1 insert TASK (TYPE, TASK_NO, SEQ_NO, USER_ID, SUB_TYPE, EC_ID, STATUS, COMPLETED_DATE) select TYPE, TASK_NO, SEQ_NO + 1, '%@', '%@', EC_ID, 'C', GETDATE() from task where ec_id = '%@' and SEQ_NO = 1 and SUB_TYPE = 'AT';", [self.username uppercaseString], self.requisition_id, self.requisition_id, self.requisition_id, self.requisition_id, self.requisition_id, self.username, self.requisition_type, self.requisition_id];
     [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
             dbBlock(YES);
     }];
@@ -115,7 +114,7 @@ typedef void(^my2Completion) (BOOL);
 
 - (void) dbDeclineRequisition:(myCompletion) dbBlock{
     if(self.connection){
-    NSString *sql = [NSString stringWithFormat:@"UPDATE PURC_REQUISITION set STATUS = 'X', ASSIGNED_TO = 'GRIVERA', APP1_DATE = getdate(), APP2_DATE = getdate(), USER_9 = '%@', USER_10 = 'APP_MOVIL' where ID = '%@'; update purc_req_line set line_status = 'X' where purc_req_id = '%@'; select top 1 task_no,seq_no from TASK where EC_ID = '%@' order by seq_no desc UPDATE TASK SET USER_ID = 'GRIVERA', STATUS = 'P' WHERE EC_ID = '%@' AND SEQ_NO = 1 AND SUB_TYPE = 'AT' UPDATE TASK SET COMPLETED_DATE = getdate(), STATUS_EFF_DATE = getdate(), STATUS = 'C' WHERE EC_ID = '%@' AND SEQ_NO > 1 insert TASK (TYPE, TASK_NO, SEQ_NO, USER_ID, SUB_TYPE, EC_ID, STATUS, COMPLETED_DATE) select TYPE, TASK_NO, SEQ_NO + 1, '%@', '%@', EC_ID, 'C', GETDATE() from task where ec_id = '%@' and SEQ_NO = 1 and SUB_TYPE = 'AT';", self.username, self.requisition_id, self.requisition_id, self.requisition_id, self.requisition_id, self.requisition_id, self.username, self.requisition_type, self.requisition_id];
+    NSString *sql = [NSString stringWithFormat:@"UPDATE PURC_REQUISITION set STATUS = 'X', ASSIGNED_TO = 'GRIVERA', APP1_DATE = getdate(), APP2_DATE = getdate(), USER_9 = '%@', USER_10 = 'APP_MOVIL' where ID = '%@'; update purc_req_line set line_status = 'X' where purc_req_id = '%@'; select top 1 task_no,seq_no from TASK where EC_ID = '%@' order by seq_no desc UPDATE TASK SET USER_ID = 'GRIVERA', STATUS = 'P' WHERE EC_ID = '%@' AND SEQ_NO = 1 AND SUB_TYPE = 'AT' UPDATE TASK SET COMPLETED_DATE = getdate(), STATUS_EFF_DATE = getdate(), STATUS = 'C' WHERE EC_ID = '%@' AND SEQ_NO > 1 insert TASK (TYPE, TASK_NO, SEQ_NO, USER_ID, SUB_TYPE, EC_ID, STATUS, COMPLETED_DATE) select TYPE, TASK_NO, SEQ_NO + 1, '%@', '%@', EC_ID, 'C', GETDATE() from task where ec_id = '%@' and SEQ_NO = 1 and SUB_TYPE = 'AT';", [self.username uppercaseString], self.requisition_id, self.requisition_id, self.requisition_id, self.requisition_id, self.requisition_id, self.username, self.requisition_type, self.requisition_id];
     [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
          dbBlock(YES);
     }];
@@ -429,7 +428,7 @@ typedef void(^my2Completion) (BOOL);
 - (void) didDeclineRequisition{
     [self dbTaskNumberByRequisitionId:^(BOOL finished) {
         if(finished){
-            [self dbAfterApprove:^(BOOL finished_0){
+            [self dbAfterDecline:^(BOOL finished_0){
                 if(finished_0){
                     RequisitionDeclineViewController *decline_vc = [[RequisitionDeclineViewController alloc] initWithNibName:@"RequisitionDeclineView_style_1" bundle:nil];
                     [[self navigationController] pushViewController:decline_vc animated:YES];
