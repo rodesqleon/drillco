@@ -164,7 +164,7 @@ typedef void(^myCompletion) (BOOL);
 {
     SQLClient* client = [SQLClient sharedInstance];
     self.view.userInteractionEnabled = NO;
-    [client connect:@"200.72.13.150" username:@"sa" password:@"13871388" database:@"Drilprue" completion:^(BOOL success) {
+    [client connect:@"200.72.13.150" username:@"sa" password:@"13871388" database:@"Drillco" completion:^(BOOL success) {
         self.view.userInteractionEnabled = YES;
         if (success) {
             

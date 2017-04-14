@@ -18,4 +18,5 @@
 @property (nonatomic) NSString *username;
 @property (nonatomic) NSArray *totalAmountByRequisition;
 @property (nonatomic) NSString *task_no;
+@property (nonatomic) NSString *seq_no;
 @end

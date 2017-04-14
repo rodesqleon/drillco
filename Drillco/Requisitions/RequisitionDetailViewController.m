@@ -102,7 +102,7 @@ typedef void(^my2Completion) (BOOL);
 
 - (void) dbApproveRequisition:(myCompletion) dbBlock{
     if(self.connection){
-    NSString *sql = [NSString stringWithFormat:@"UPDATE PURC_REQUISITION set STATUS = 'V', ASSIGNED_TO = 'GRIVERA', APP1_DATE = getdate(), APP2_DATE = getdate(), USER_9 = '%@', USER_10 = 'APP_MOVIL' where ID = '%@'; update purc_req_line set line_status = 'V' where purc_req_id = '%@'; select top 1 task_no,seq_no from TASK where EC_ID = '%@' order by seq_no desc UPDATE TASK SET USER_ID = 'GRIVERA', STATUS = 'P' WHERE EC_ID = '%@' AND SEQ_NO = 1 AND SUB_TYPE = 'AT' UPDATE TASK SET COMPLETED_DATE = getdate(), STATUS_EFF_DATE = getdate(), STATUS = 'C' WHERE EC_ID = '%@' AND SEQ_NO > 1 insert TASK (TYPE, TASK_NO, SEQ_NO, USER_ID, SUB_TYPE, EC_ID, STATUS, COMPLETED_DATE) select TYPE, TASK_NO, SEQ_NO + 1, '%@', '%@', EC_ID, 'C', GETDATE() from task where ec_id = '%@' and SEQ_NO = 1 and SUB_TYPE = 'AT';", [self.username uppercaseString], self.requisition_id, self.requisition_id, self.requisition_id, self.requisition_id, self.requisition_id, self.username, self.requisition_type, self.requisition_id];
+    NSString *sql = [NSString stringWithFormat:@"UPDATE PURC_REQUISITION set STATUS = 'V', ASSIGNED_TO = 'GRIVERA', APP1_DATE = getdate(), APP2_DATE = getdate(), USER_9 = '%@', USER_10 = 'APP_MOVIL-IOS' where ID = '%@'; update purc_req_line set line_status = 'V' where purc_req_id = '%@'; select top 1 task_no,seq_no from TASK where EC_ID = '%@' order by seq_no desc UPDATE TASK SET USER_ID = 'GRIVERA', STATUS = 'P' WHERE EC_ID = '%@' AND SEQ_NO = 1 AND SUB_TYPE = 'AT' UPDATE TASK SET COMPLETED_DATE = getdate(), STATUS_EFF_DATE = getdate(), STATUS = 'C' WHERE EC_ID = '%@' AND SEQ_NO > 1 insert TASK (TYPE, TASK_NO, SEQ_NO, USER_ID, SUB_TYPE, EC_ID, STATUS, COMPLETED_DATE) select TYPE, TASK_NO, SEQ_NO + 1, '%@', '%@', EC_ID, 'C', GETDATE() from task where ec_id = '%@' and SEQ_NO = 1 and SUB_TYPE = 'AT';", [self.username uppercaseString], self.requisition_id, self.requisition_id, self.requisition_id, self.requisition_id, self.requisition_id, self.username, self.requisition_type, self.requisition_id];
     [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
             dbBlock(YES);
     }];
@@ -114,7 +114,7 @@ typedef void(^my2Completion) (BOOL);
 
 - (void) dbDeclineRequisition:(myCompletion) dbBlock{
     if(self.connection){
-    NSString *sql = [NSString stringWithFormat:@"UPDATE PURC_REQUISITION set STATUS = 'X', ASSIGNED_TO = 'GRIVERA', APP1_DATE = getdate(), APP2_DATE = getdate(), USER_9 = '%@', USER_10 = 'APP_MOVIL' where ID = '%@'; update purc_req_line set line_status = 'X' where purc_req_id = '%@'; select top 1 task_no,seq_no from TASK where EC_ID = '%@' order by seq_no desc UPDATE TASK SET USER_ID = 'GRIVERA', STATUS = 'P' WHERE EC_ID = '%@' AND SEQ_NO = 1 AND SUB_TYPE = 'AT' UPDATE TASK SET COMPLETED_DATE = getdate(), STATUS_EFF_DATE = getdate(), STATUS = 'C' WHERE EC_ID = '%@' AND SEQ_NO > 1 insert TASK (TYPE, TASK_NO, SEQ_NO, USER_ID, SUB_TYPE, EC_ID, STATUS, COMPLETED_DATE) select TYPE, TASK_NO, SEQ_NO + 1, '%@', '%@', EC_ID, 'C', GETDATE() from task where ec_id = '%@' and SEQ_NO = 1 and SUB_TYPE = 'AT';", [self.username uppercaseString], self.requisition_id, self.requisition_id, self.requisition_id, self.requisition_id, self.requisition_id, self.username, self.requisition_type, self.requisition_id];
+    NSString *sql = [NSString stringWithFormat:@"UPDATE PURC_REQUISITION set STATUS = 'X', ASSIGNED_TO = 'GRIVERA', APP1_DATE = getdate(), APP2_DATE = getdate(), USER_9 = '%@', USER_10 = 'APP_MOVIL-IOS' where ID = '%@'; update purc_req_line set line_status = 'X' where purc_req_id = '%@'; select top 1 task_no,seq_no from TASK where EC_ID = '%@' order by seq_no desc UPDATE TASK SET USER_ID = 'GRIVERA', STATUS = 'P' WHERE EC_ID = '%@' AND SEQ_NO = 1 AND SUB_TYPE = 'AT' UPDATE TASK SET COMPLETED_DATE = getdate(), STATUS_EFF_DATE = getdate(), STATUS = 'C' WHERE EC_ID = '%@' AND SEQ_NO > 1 insert TASK (TYPE, TASK_NO, SEQ_NO, USER_ID, SUB_TYPE, EC_ID, STATUS, COMPLETED_DATE) select TYPE, TASK_NO, SEQ_NO + 1, '%@', '%@', EC_ID, 'C', GETDATE() from task where ec_id = '%@' and SEQ_NO = 1 and SUB_TYPE = 'AT';", [self.username uppercaseString], self.requisition_id, self.requisition_id, self.requisition_id, self.requisition_id, self.requisition_id, self.username, self.requisition_type, self.requisition_id];
     [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
          dbBlock(YES);
     }];
@@ -125,11 +125,12 @@ typedef void(^my2Completion) (BOOL);
 }
 
 -(void)dbTaskNumberByRequisitionId:(myCompletion) dbBlock{
-        NSString *sql = [NSString stringWithFormat:@"select TASK_NO from TASK where USER_ID = 'GRIVERA' AND EC_ID = '%@'", self.requisition_id];
+        NSString *sql = [NSString stringWithFormat:@"select TASK_NO, SEQ_NO from TASK where USER_ID = 'GRIVERA' AND EC_ID = '%@'", self.requisition_id];
         [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
             if(results[0]){
                 NSDictionary *dict = [results[0] objectAtIndex:0];
                 self.task_no = [dict[@"TASK_NO"] description];
+                self.seq_no = [dict[@"SEQ_NO"] description];
             }
             dbBlock(YES);
         }];
@@ -141,7 +142,7 @@ typedef void(^my2Completion) (BOOL);
         [dateFormatter setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
         // or @"yyyy-MM-dd hh:mm:ss a" if you prefer the time with AM/PM
         NSString *date_now = [[dateFormatter stringFromDate:[NSDate date]] description];
-        NSString *comment = [NSString stringWithFormat:@"%@ - %@ STATUS APPROVED x MOVIL REQ/%@ TASK/%@", self.username, date_now, self.requisition_id, self.task_no];
+        NSString *comment = [NSString stringWithFormat:@"%@ - %@ STATUS APPROVED x MOVIL REQ/%@ TASK/%@.%@", self.username, date_now, self.requisition_id, self.task_no, self.seq_no];
         NSString *sql = [NSString stringWithFormat:@"insert TASK_BINARY (TASK_TYPE,TASK_NO,SEQ_NO,TYPE,BITS,BITS_LENGTH) values ('REQ','%@',1,'D','%@', DATALENGTH('%@'))", self.task_no, comment, comment];
         [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
             dbBlock(YES);
@@ -157,7 +158,7 @@ typedef void(^my2Completion) (BOOL);
         [dateFormatter setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
         // or @"yyyy-MM-dd hh:mm:ss a" if you prefer the time with AM/PM
         NSString *date_now = [[dateFormatter stringFromDate:[NSDate date]] description];
-        NSString *comment = [NSString stringWithFormat:@"%@ - %@ STATUS CANCELLED x MOVIL REQ/%@ TASK/%@", self.username, date_now, self.requisition_id, self.task_no];
+        NSString *comment = [NSString stringWithFormat:@"%@ - %@ STATUS CANCELLED x MOVIL REQ/%@ TASK/%@.%@", self.username, date_now, self.requisition_id, self.task_no, self.seq_no];
         NSString *sql = [NSString stringWithFormat:@"insert TASK_BINARY (TASK_TYPE,TASK_NO,SEQ_NO,TYPE,BITS,BITS_LENGTH) values ('REQ','%@',1,'D','%@', DATALENGTH('%@'))", self.task_no, comment, comment];
         [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
             dbBlock(YES);
@@ -507,7 +508,7 @@ typedef void(^my2Completion) (BOOL);
 {
     SQLClient* client = [SQLClient sharedInstance];
     self.view.userInteractionEnabled = NO;
-    [client connect:@"200.72.13.150" username:@"sa" password:@"13871388" database:@"Drilprue" completion:^(BOOL success) {
+    [client connect:@"200.72.13.150" username:@"sa" password:@"13871388" database:@"Drillco" completion:^(BOOL success) {
         self.view.userInteractionEnabled = YES;
         if (success) {
             self.connection = YES;
