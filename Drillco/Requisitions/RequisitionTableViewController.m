@@ -10,6 +10,11 @@
 #import "RequisitionCell.h"
 #import "Reachability.h"
 
+#define IP_ADDRESS "192.168.1.13"
+#define USERNAME "sa"
+#define PASSWORD "13871388"
+#define DATABASE "DRILPRUE"
+
 typedef void(^myCompletion) (BOOL);
 
 @interface RequisitionTableViewController ()
@@ -181,7 +186,7 @@ typedef void(^myCompletion) (BOOL);
 
 - (void) dbCallRequisitionDetialId:(NSString *) requisitionId Block:(myCompletion) dbBlock {
     [self connect];
-    NSString * sql = [NSString stringWithFormat:@"select pl.LINE_NO as [LINEA], pl.PART_ID as [CODIGO PRODUCTO], (case isnull(p.description,'') when '' then CONVERT(VARCHAR(200),CONVERT(VARBINARY(200),pb.bits)) else p.DESCRIPTION end) as [PRODUCTO], pl.ORDER_QTY as [CANTIDAD], pl.UNIT_PRICE as [PRECIO UNITARIO], pl.ORDER_QTY * pl.UNIT_PRICE as [TOTAL FINAL] from PURC_REQ_LINE pl,PURC_REQ_LN_BINARY pb, PART p where pl.PURC_REQ_ID = '%@' and pl.PURC_REQ_ID *= pb.PURC_REQ_ID and pl.LINE_NO *= pb.PURC_REQ_LINE_NO and pl.PART_ID *= p.id order by pl.line_no", requisitionId];
+    NSString * sql = [NSString stringWithFormat:@"select pl.LINE_NO as [LINEA], pl.PART_ID as [CODIGO PRODUCTO], (case isnull(p.description,'') when '' then isnull(replace(CONVERT ( VARCHAR ( 200 ), CONVERT (VARBINARY( 200 ),PB.BITS)),char(0),''),'') else p.DESCRIPTION end) as [PRODUCTO], pl.ORDER_QTY as [CANTIDAD], pl.UNIT_PRICE as [PRECIO UNITARIO], pl.ORDER_QTY * pl.UNIT_PRICE as [TOTAL FINAL] from PURC_REQ_LINE pl,PURC_REQ_LN_BINARY pb, PART p where pl.PURC_REQ_ID = '%@' and pl.PURC_REQ_ID = pb.PURC_REQ_ID and pl.LINE_NO = pb.PURC_REQ_LINE_NO and pl.PART_ID = p.id order by pl.line_no", requisitionId];
     [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
         if (results) {
             self.requisition_detail = results;
@@ -331,7 +336,7 @@ typedef void(^myCompletion) (BOOL);
 {
     SQLClient* client = [SQLClient sharedInstance];
     self.view.userInteractionEnabled = NO;
-    [client connect:@"200.72.13.150" username:@"sa" password:@"13871388" database:@"Drillco" completion:^(BOOL success) {
+    [client connect:@IP_ADDRESS username:@USERNAME password:@PASSWORD database:@DATABASE completion:^(BOOL success) {
         self.view.userInteractionEnabled = YES;
         if (success) {
             //			[self execute];

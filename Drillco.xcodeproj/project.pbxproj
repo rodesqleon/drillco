@@ -422,7 +422,7 @@
 				TargetAttributes = {
 					A4E481981E6E27EF00D21E34 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 53337WJ5R4;
+						DevelopmentTeam = DJ3U3M6KD4;
 						ProvisioningStyle = Manual;
 					};
 					A4E481B11E6E27F000D21E34 = {
@@ -654,9 +654,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: rorrork@gmail.com (65KU45MAAS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: rorrork@gmail.com (65KU45MAAS)";
-				DEVELOPMENT_TEAM = 53337WJ5R4;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Moofwd Inc.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Moofwd Inc.";
+				DEVELOPMENT_TEAM = DJ3U3M6KD4;
 				ENABLE_BITCODE = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = Drillco/Info.plist;
@@ -667,10 +667,10 @@
 					"$(PROJECT_DIR)/Drillco/Libs/SQLClient",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.rodev.Drillco;
+				PRODUCT_BUNDLE_IDENTIFIER = com.moofwdinc.rodrigoetest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5e1a584f-08f4-4935-8cf3-5a8042c8d792";
-				PROVISIONING_PROFILE_SPECIFIER = DRILLCO_DEVELOPMENT;
+				PROVISIONING_PROFILE_SPECIFIER = "rodrigoe test enterprise";
 				STRIP_INSTALLED_PRODUCT = YES;
 			};
 			name = Debug;
@@ -681,9 +681,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: rorrork@gmail.com (65KU45MAAS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: rorrork@gmail.com (65KU45MAAS)";
-				DEVELOPMENT_TEAM = 53337WJ5R4;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Moofwd Inc.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Moofwd Inc.";
+				DEVELOPMENT_TEAM = DJ3U3M6KD4;
 				ENABLE_BITCODE = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = Drillco/Info.plist;
@@ -694,10 +694,10 @@
 					"$(PROJECT_DIR)/Drillco/Libs/SQLClient",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.rodev.Drillco;
+				PRODUCT_BUNDLE_IDENTIFIER = com.moofwdinc.rodrigoetest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5e1a584f-08f4-4935-8cf3-5a8042c8d792";
-				PROVISIONING_PROFILE_SPECIFIER = DRILLCO_DEVELOPMENT;
+				PROVISIONING_PROFILE_SPECIFIER = "rodrigoe test enterprise";
 				STRIP_INSTALLED_PRODUCT = YES;
 			};
 			name = Release;

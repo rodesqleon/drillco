@@ -9,6 +9,11 @@
 #import "RequisitionAdminTableViewController.h"
 #import "RequisitionCell.h"
 
+#define IP_ADDRESS "192.168.1.13"
+#define USERNAME "sa"
+#define PASSWORD "13871388"
+#define DATABASE "DRILPRUE"
+
 typedef void(^myCompletion) (BOOL);
 
 @interface RequisitionAdminTableViewController ()
@@ -239,7 +244,7 @@ typedef void(^myCompletion) (BOOL);
 {
     SQLClient* client = [SQLClient sharedInstance];
     self.view.userInteractionEnabled = NO;
-    [client connect:@"200.72.13.150" username:@"sa" password:@"13871388" database:@"Drillco" completion:^(BOOL success) {
+    [client connect:@IP_ADDRESS username:@USERNAME password:@PASSWORD database:@DATABASE completion:^(BOOL success) {
         self.view.userInteractionEnabled = YES;
         if (success) {
             //			[self execute];

@@ -13,6 +13,11 @@
 #import "RequisitionDeclineViewController.h"
 #import "Reachability.h"
 
+#define IP_ADDRESS "192.168.1.13"
+#define USERNAME "sa"
+#define PASSWORD "13871388"
+#define DATABASE "DRILPRUE"
+
 typedef void(^myCompletion) (BOOL);
 typedef void(^my2Completion) (BOOL);
 
@@ -228,7 +233,7 @@ typedef void(^my2Completion) (BOOL);
 
 - (void) dbCallTotalAmountForEachNum:(NSString *) requisitionId Block:(myCompletion) dbBlock {
     [self connect];
-    NSString * sql = [NSString stringWithFormat:@"select pl.ORDER_QTY * pl.UNIT_PRICE as [TOTAL_FINAL] from PURC_REQ_LINE pl,PURC_REQ_LN_BINARY pb, PART p where pl.PURC_REQ_ID = '%@' and pl.PURC_REQ_ID *= pb.PURC_REQ_ID and pl.LINE_NO *= pb.PURC_REQ_LINE_NO and pl.PART_ID *= p.id order by pl.line_no", requisitionId];
+    NSString * sql = [NSString stringWithFormat:@"select pl.ORDER_QTY * pl.UNIT_PRICE as [TOTAL_FINAL] from PURC_REQ_LINE pl,PURC_REQ_LN_BINARY pb, PART p where pl.PURC_REQ_ID = '%@' and pl.PURC_REQ_ID = pb.PURC_REQ_ID and pl.LINE_NO = pb.PURC_REQ_LINE_NO and pl.PART_ID = p.id order by pl.line_no", requisitionId];
     [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
         if (results) {
             self.totalAmountByRequisition = results;
@@ -508,7 +513,7 @@ typedef void(^my2Completion) (BOOL);
 {
     SQLClient* client = [SQLClient sharedInstance];
     self.view.userInteractionEnabled = NO;
-    [client connect:@"200.72.13.150" username:@"sa" password:@"13871388" database:@"Drillco" completion:^(BOOL success) {
+    [client connect:@IP_ADDRESS username:@USERNAME password:@PASSWORD database:@DATABASE completion:^(BOOL success) {
         self.view.userInteractionEnabled = YES;
         if (success) {
             self.connection = YES;
