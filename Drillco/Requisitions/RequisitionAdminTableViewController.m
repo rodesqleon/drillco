@@ -148,12 +148,11 @@ typedef void(^myCompletion) (BOOL);
             
         }
     }];
-    
 }
 
 - (void) dbCallRequisition:(myCompletion) dbBlock{
     [self connect];
-    NSString * sql = @"select P.ID, v.NAME, P.VENDOR_ID, pr.CURRENCY_ID, P.DESIRED_RECV_DATE, PR.AMOUNT,P.ASSIGNED_TO from PURC_REQUISITION p, VENDOR v, PURC_REQ_CURR pr where pr.currency_id = P.CURRENCY_ID and p.STATUS = 'I' and p.VENDOR_ID = v.ID and p.ID = pr.PURC_REQ_ID order by P.REQUISITION_DATE";
+    NSString * sql = @"select P.ID, ltrim(rtrim(upper(V.NAME))), P.VENDOR_ID, pr.CURRENCY_ID, P.DESIRED_RECV_DATE, PR.AMOUNT,P.ASSIGNED_TO from PURC_REQUISITION p, VENDOR v, PURC_REQ_CURR pr where pr.currency_id = P.CURRENCY_ID and p.STATUS = 'I' and p.VENDOR_ID = v.ID and p.ID = pr.PURC_REQ_ID order by P.REQUISITION_DATE";
     [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
         if (results) {
             self.requisition = results[0];

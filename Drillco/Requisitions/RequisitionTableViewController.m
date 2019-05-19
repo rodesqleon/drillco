@@ -186,7 +186,7 @@ typedef void(^myCompletion) (BOOL);
 
 - (void) dbCallRequisitionDetialId:(NSString *) requisitionId Block:(myCompletion) dbBlock {
     [self connect];
-    NSString * sql = [NSString stringWithFormat:@"select pl.LINE_NO as [LINEA], pl.PART_ID as [CODIGO PRODUCTO], (case isnull(p.description,'') when '' then isnull(replace(CONVERT ( VARCHAR ( 200 ), CONVERT (VARBINARY( 200 ),PB.BITS)),char(0),''),'') else p.DESCRIPTION end) as [PRODUCTO], pl.ORDER_QTY as [CANTIDAD], pl.UNIT_PRICE as [PRECIO UNITARIO], pl.ORDER_QTY * pl.UNIT_PRICE as [TOTAL FINAL] from PURC_REQ_LINE pl,PURC_REQ_LN_BINARY pb, PART p where pl.PURC_REQ_ID = '%@' and pl.PURC_REQ_ID = pb.PURC_REQ_ID and pl.LINE_NO = pb.PURC_REQ_LINE_NO and pl.PART_ID = p.id order by pl.line_no", requisitionId];
+    NSString * sql = [NSString stringWithFormat:@"SELECT PL.LINE_NO AS [LINEA], PL.PART_ID AS [CODIGO PRODUCTO],(CASE ISNULL (P.DESCRIPTION, '' ) WHEN '' THEN isnull(replace(CONVERT ( VARCHAR ( 200 ), CONVERT (VARBINARY( 200 ),PB.BITS)),char(0),''),'') ELSE P.DESCRIPTION END) AS [PRODUCTO], PL.ORDER_QTY AS [CANTIDAD], PL.UNIT_PRICE AS [PRECIOUNITARIO], PL.ORDER_QTY * PL.UNIT_PRICE AS [TOTAL FINAL ] FROM PURC_REQ_LINE PL left join PURC_REQ_LN_BINARY PB on PL.PURC_REQ_ID = PB.PURC_REQ_ID AND PL.LINE_NO = PB.PURC_REQ_LINE_NO left join PART P on PL.PART_ID = P.IDWHERE PL.PURC_REQ_ID = %@ORDER BY PL.LINE_NO", requisitionId];
     [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
         if (results) {
             self.requisition_detail = results;
@@ -202,7 +202,7 @@ typedef void(^myCompletion) (BOOL);
 
 - (void) dbCallRequisition:(myCompletion) dbBlock{
     [self connect];
-    NSString * sql = [NSString stringWithFormat:@"select P.ID, v.NAME, P.VENDOR_ID, pr.CURRENCY_ID, P.DESIRED_RECV_DATE, PR.AMOUNT from PURC_REQUISITION p, VENDOR v, PURC_REQ_CURR pr where pr.currency_id = P.CURRENCY_ID and p.ASSIGNED_TO = '%@' and p.STATUS = 'I' and p.VENDOR_ID = v.ID and p.ID = pr.PURC_REQ_ID order by P.REQUISITION_DATE", self.username];
+    NSString * sql = [NSString stringWithFormat:@"select P.ID, ltrim(rtrim(upper(V.NAME))), P.VENDOR_ID, pr.CURRENCY_ID, P.DESIRED_RECV_DATE, PR.AMOUNT from PURC_REQUISITION p, VENDOR v, PURC_REQ_CURR pr where pr.currency_id = P.CURRENCY_ID and p.ASSIGNED_TO = '%@' and p.STATUS = 'I' and p.VENDOR_ID = v.ID and p.ID = pr.PURC_REQ_ID order by P.REQUISITION_DATE", self.username];
     [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
         if (results) {
             self.requisition = results[0];

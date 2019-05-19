@@ -81,7 +81,7 @@ typedef void(^my2Completion) (BOOL);
 
 - (void) dbCallProduct:(myCompletion) dbBlock{
     [self connect];
-    NSString * sql = [NSString stringWithFormat:@"select top 5 P.ID as [NUM REQUISICION], v.NAME as [NOMBRE PROVEEDOR], P.VENDOR_ID as [RUT], P.CURRENCY_ID as [MONEDA], P.DESIRED_RECV_DATE as [FEC DESEADA], pl.UNIT_PRICE as [PRECIO UNIT] from PURC_REQUISITION p, VENDOR v, PURC_REQ_LINE pl, PART pa where p.STATUS = 'C' and p.VENDOR_ID = v.ID and p.ID = pl.PURC_REQ_ID and pa.ID = pl.PART_ID and pa.DESCRIPTION = '%@' order by p.desired_recv_date desc,p.id,pl.LINE_NO", self.productName];
+    NSString * sql = [NSString stringWithFormat:@"select top 5 P.ID as [NUM REQUISICION], ltrim(rtrim(upper(V.NAME))) as [NOMBRE PROVEEDOR], P.VENDOR_ID as [RUT], P.CURRENCY_ID as [MONEDA], P.DESIRED_RECV_DATE as [FEC DESEADA], pl.UNIT_PRICE as [PRECIO UNIT] from PURC_REQUISITION p, VENDOR v, PURC_REQ_LINE pl, PART pa where p.STATUS = 'C' and p.VENDOR_ID = v.ID and p.ID = pl.PURC_REQ_ID and pa.ID = pl.PART_ID and pa.DESCRIPTION like '%@' order by p.desired_recv_date desc,p.id,pl.LINE_NO", self.productName];
     [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
         if (results) {
             self.results = results[0];
@@ -96,7 +96,7 @@ typedef void(^my2Completion) (BOOL);
 
 - (void) dbCallSupplier:(myCompletion) dbBlock{
     [self connect];
-    NSString *sql = [NSString stringWithFormat:@"select top 5 p.ID, p.total_amt_ordered, P.REQUISITION_DATE, v.NAME from PURC_REQUISITION p, VENDOR v where p.vendor_id = v.id and p.status = 'C' and v.NAME = '%@' order by REQUISITION_DATE", self.provider_name];
+    NSString *sql = [NSString stringWithFormat:@"select top 5 p.ID, p.total_amt_ordered, P.REQUISITION_DATE,  ltrim(rtrim(upper(V.NAME))) from PURC_REQUISITION p, VENDOR v where p.vendor_id = v.id and p.status = 'C' and v.NAME like '%@' order by REQUISITION_DATE", self.provider_name];
     [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
         if (results) {
             self.results = results[0];
@@ -233,7 +233,7 @@ typedef void(^my2Completion) (BOOL);
 
 - (void) dbCallTotalAmountForEachNum:(NSString *) requisitionId Block:(myCompletion) dbBlock {
     [self connect];
-    NSString * sql = [NSString stringWithFormat:@"select pl.ORDER_QTY * pl.UNIT_PRICE as [TOTAL_FINAL] from PURC_REQ_LINE pl,PURC_REQ_LN_BINARY pb, PART p where pl.PURC_REQ_ID = '%@' and pl.PURC_REQ_ID = pb.PURC_REQ_ID and pl.LINE_NO = pb.PURC_REQ_LINE_NO and pl.PART_ID = p.id order by pl.line_no", requisitionId];
+    NSString * sql = [NSString stringWithFormat:@"select pl.ORDER_QTY * pl.UNIT_PRICE as [TOTAL_FINAL] FROM PURC_REQ_LINE PL left join PURC_REQ_LN_BINARY PB on PL.PURC_REQ_ID = PB.PURC_REQ_ID AND PL.LINE_NO = PB.PURC_REQ_LINE_NO left join PART P on PL.PART_ID = P.ID WHERE PL.PURC_REQ_ID = '%@'", requisitionId];
     [[SQLClient sharedInstance] execute:sql completion:^(NSArray* results) {
         if (results) {
             self.totalAmountByRequisition = results;
