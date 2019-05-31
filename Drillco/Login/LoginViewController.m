@@ -10,10 +10,10 @@
 #import "Reachability.h"
 
 
-#define IP_ADDRESS "192.168.1.13"
+#define IP_ADDRESS "200.72.13.153"
 #define USERNAME "sa"
 #define PASSWORD "13871388"
-#define DATABASE "DRILPRUE"
+#define DATABASE "DRILLCO"
 
 typedef void(^myCompletion) (BOOL);
 
